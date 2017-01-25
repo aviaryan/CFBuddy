@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 
 import com.android.volley.Response;
+import com.google.firebase.crash.FirebaseCrash;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -45,6 +46,7 @@ public class UserParser extends BaseParser implements Response.Listener<JSONObje
             user.maxRating = profileObject.getInt("maxRating");
 
         } catch (JSONException e){
+            FirebaseCrash.report(e);
             Log.d(TAG, e.toString());
         }
     }

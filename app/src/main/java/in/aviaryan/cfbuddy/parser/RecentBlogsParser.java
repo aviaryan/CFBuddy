@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import com.android.volley.Response;
+import com.google.firebase.crash.FirebaseCrash;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,8 +48,11 @@ public class RecentBlogsParser extends BaseParser implements Response.Listener<J
                 blogs.add(blog);
             }
 
+            FirebaseCrash.log("tada");  // TODO: remove this
+
             ((RecentBlogsFragment) fragment).updateData(blogs);
         } catch (JSONException e){
+            FirebaseCrash.report(e);
             Log.d(TAG, e.toString());
         }
     }

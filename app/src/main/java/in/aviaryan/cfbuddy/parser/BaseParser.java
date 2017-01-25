@@ -1,6 +1,8 @@
 package in.aviaryan.cfbuddy.parser;
 
 
+import com.google.firebase.crash.FirebaseCrash;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -16,6 +18,7 @@ public class BaseParser {
             } else
                 return null;
         } catch (JSONException e){
+            FirebaseCrash.report(e);
             return null;
         }
     }
