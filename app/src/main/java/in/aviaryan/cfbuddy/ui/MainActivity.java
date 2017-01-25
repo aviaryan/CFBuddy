@@ -3,6 +3,8 @@ package in.aviaryan.cfbuddy.ui;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,6 +19,8 @@ import in.aviaryan.cfbuddy.R;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +44,14 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        // display default
+        displayFragment(new RecentBlogsFragment());
+        navigationView.setCheckedItem(R.id.nav_manage);
     }
+
 
     @Override
     public void onBackPressed() {
@@ -89,15 +98,34 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
-
+            displayFragment(new RecentBlogsFragment());
         } else if (id == R.id.nav_find_user) {
 
         } else if (id == R.id.nav_about) {
 
         }
 
+        navigationView.setCheckedItem(id);
+        closeDrawer();
+        return true;
+    }
+
+    /*
+     * Displays a fragment
+     */
+    private void displayFragment(Fragment fragment){
+        if (fragment != null) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.content_frame, fragment);
+            ft.commit();
+        }
+    }
+
+    /*
+     * Closes drawer
+     */
+    private void closeDrawer(){
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
-        return true;
     }
 }
