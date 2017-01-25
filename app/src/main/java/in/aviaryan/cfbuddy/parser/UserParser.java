@@ -13,7 +13,7 @@ import in.aviaryan.cfbuddy.model.User;
 
 
 public class UserParser extends BaseParser implements Response.Listener<JSONObject> {
-    private final String TAG = "CFLOG_PP";
+    private final String TAG = "CFLOG_UP";
     private Fragment fragment;
 
     public UserParser(Fragment fragment){
