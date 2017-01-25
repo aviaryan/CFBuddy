@@ -29,11 +29,18 @@ public class RecentBlogsParser extends BaseParser implements Response.Listener<J
     @Override
     public void onResponse(JSONObject response) {
         Log.d(TAG, response.toString());
+        ArrayList<Blog> blogs = parse(response);
+        FirebaseCrash.log("tada");  // TODO: remove this
+        if (blogs != null) {
+            ((RecentBlogsFragment) fragment).updateData(blogs);
+        }
+    }
 
+    public ArrayList<Blog> parse(JSONObject jsonObject){
         ArrayList<Blog> blogs = new ArrayList<>();
 
         try {
-            JSONArray result = response.getJSONArray("result");
+            JSONArray result = jsonObject.getJSONArray("result");
             for (int i=0; i<result.length(); i++){
                 JSONObject blogData = result.getJSONObject(i).getJSONObject("blogEntry");
                 Blog blog = new Blog();
@@ -47,13 +54,11 @@ public class RecentBlogsParser extends BaseParser implements Response.Listener<J
 
                 blogs.add(blog);
             }
-
-            FirebaseCrash.log("tada");  // TODO: remove this
-
-            ((RecentBlogsFragment) fragment).updateData(blogs);
+            return blogs;
         } catch (JSONException e){
             FirebaseCrash.report(e);
             Log.d(TAG, e.toString());
+            return null;
         }
     }
 }

@@ -27,10 +27,13 @@ public class ContestsParser extends BaseParser implements Response.Listener<JSON
     @Override
     public void onResponse(JSONObject response) {
         Log.d(TAG, response.toString());
+        ArrayList<Contest> contests = parse(response);
+    }
 
+    public ArrayList<Contest> parse(JSONObject jsonObject){
         ArrayList<Contest> contests = new ArrayList<>();
         try {
-            JSONArray result = response.getJSONArray("result");
+            JSONArray result = jsonObject.getJSONArray("result");
             for (int i=0; i<result.length(); i++){
                 JSONObject jsObj = result.getJSONObject(i);
                 Contest contest = new Contest();
@@ -45,9 +48,11 @@ public class ContestsParser extends BaseParser implements Response.Listener<JSON
                 }
                 contests.add(contest);
             }
+            return contests;
         } catch (JSONException e){
             FirebaseCrash.report(e);
             Log.d(TAG, e.toString());
+            return null;
         }
     }
 }

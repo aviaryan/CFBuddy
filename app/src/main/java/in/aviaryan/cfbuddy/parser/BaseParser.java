@@ -6,6 +6,7 @@ import com.google.firebase.crash.FirebaseCrash;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
 public class BaseParser {
     /*
      * Gets the object from the JSONObject safely,
@@ -17,6 +18,18 @@ public class BaseParser {
                 return jsObj.getString(key);
             } else
                 return null;
+        } catch (JSONException e){
+            FirebaseCrash.report(e);
+            return null;
+        }
+    }
+
+    /*
+     * Converts string to json object
+     */
+    public JSONObject stringToJson(String str){
+        try {
+            return new JSONObject(str);
         } catch (JSONException e){
             FirebaseCrash.report(e);
             return null;

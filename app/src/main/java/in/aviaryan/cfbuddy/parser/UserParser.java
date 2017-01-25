@@ -23,10 +23,14 @@ public class UserParser extends BaseParser implements Response.Listener<JSONObje
     @Override
     public void onResponse(JSONObject response) {
         Log.d(TAG, response.toString());
+        User user = parse(response);
+    }
+
+    public User parse(JSONObject jsonObject){
         User user = new User();
 
         try {
-            JSONArray result = response.getJSONArray("result");
+            JSONArray result = jsonObject.getJSONArray("result");
             JSONObject profileObject = result.getJSONObject(0);
             // set name
             user.name = "";
@@ -45,9 +49,11 @@ public class UserParser extends BaseParser implements Response.Listener<JSONObje
             user.maxRank = profileObject.getString("maxRank");
             user.maxRating = profileObject.getInt("maxRating");
 
+            return user;
         } catch (JSONException e){
             FirebaseCrash.report(e);
             Log.d(TAG, e.toString());
+            return null;
         }
     }
 }

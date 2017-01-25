@@ -27,12 +27,15 @@ public class ProblemsParser extends BaseParser implements Response.Listener<JSON
     @Override
     public void onResponse(JSONObject response) {
         Log.d(TAG, response.toString());
+        ArrayList<Problem> problems = parse(response);
+    }
 
+    public ArrayList<Problem> parse(JSONObject jsonObject){
         ArrayList<Problem> problems = new ArrayList<>();
         HashMap<String, Integer> problemToSolved = new HashMap<>();
 
         try {
-            JSONObject result = response.getJSONObject("result");
+            JSONObject result = jsonObject.getJSONObject("result");
             // stats first
             JSONArray probStats = result.getJSONArray("problemStatistics");
             for (int i=0; i < probStats.length(); i++){
@@ -63,9 +66,11 @@ public class ProblemsParser extends BaseParser implements Response.Listener<JSON
                 problems.add(problem);
             }
 
+            return problems;
         } catch (JSONException e){
             FirebaseCrash.report(e);
             Log.d(TAG, e.toString());
+            return null;
         }
     }
 }
