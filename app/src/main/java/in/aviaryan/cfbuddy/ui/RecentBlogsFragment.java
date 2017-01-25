@@ -15,7 +15,10 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import java.util.ArrayList;
+
 import in.aviaryan.cfbuddy.R;
+import in.aviaryan.cfbuddy.model.Blog;
 import in.aviaryan.cfbuddy.parser.RecentBlogsParser;
 import in.aviaryan.cfbuddy.utils.VolleyErrorListener;
 
@@ -55,7 +58,10 @@ public class RecentBlogsFragment extends Fragment {
         queue.start();
     }
 
-    public void updateData(String data) {
-        Log.d(TAG, data);
+    public void updateData(ArrayList<Blog> blogs) {
+        Log.d(TAG, blogs.toString());
+        for (Blog b: blogs) {
+            Log.d(TAG, b.time.toString());
+        }
     }
 }
