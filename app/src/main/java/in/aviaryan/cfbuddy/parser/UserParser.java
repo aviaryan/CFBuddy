@@ -11,7 +11,7 @@ import org.json.JSONObject;
 import in.aviaryan.cfbuddy.model.User;
 
 
-public class UserParser implements Response.Listener<JSONObject> {
+public class UserParser extends BaseParser implements Response.Listener<JSONObject> {
     private final String TAG = "CFLOG_PP";
     private Fragment fragment;
 
@@ -35,8 +35,8 @@ public class UserParser implements Response.Listener<JSONObject> {
             if (profileObject.has("lastName")){
                 user.name += profileObject.getString("lastName");
             }
-            user.country = profileObject.getString("country");
-            user.organisation = profileObject.getString("organization");
+            user.country = safeGetItem(profileObject, "country");
+            user.organisation = safeGetItem(profileObject, "organization");
             user.avatar = profileObject.getString("titlePhoto");
             user.handle = profileObject.getString("handle");
             user.rank = profileObject.getString("rank");
