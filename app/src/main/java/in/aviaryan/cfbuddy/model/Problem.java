@@ -3,6 +3,7 @@ package in.aviaryan.cfbuddy.model;
 import java.util.ArrayList;
 
 public class Problem {
+    public int contestId;
     public String index;
     public String name;
     public ArrayList<String> tags;
