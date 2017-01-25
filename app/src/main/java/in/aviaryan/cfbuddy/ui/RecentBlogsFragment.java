@@ -61,7 +61,7 @@ public class RecentBlogsFragment extends Fragment {
     public void updateData(ArrayList<Blog> blogs) {
         Log.d(TAG, blogs.toString());
         for (Blog b: blogs) {
-            Log.d(TAG, b.time.toString());
+            Log.d(TAG, b.title);
         }
     }
 }

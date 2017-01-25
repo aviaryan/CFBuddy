@@ -14,6 +14,7 @@ import java.util.Date;
 
 import in.aviaryan.cfbuddy.model.Blog;
 import in.aviaryan.cfbuddy.ui.RecentBlogsFragment;
+import in.aviaryan.cfbuddy.utils.Helper;
 
 
 public class RecentBlogsParser implements Response.Listener<JSONObject> {
@@ -37,7 +38,7 @@ public class RecentBlogsParser implements Response.Listener<JSONObject> {
                 Blog blog = new Blog();
                 blog.handle = blogData.getString("authorHandle");
                 blog.id = blogData.getInt("id");
-                blog.title = blogData.getString("title");
+                blog.title = Helper.html2text(blogData.getString("title"));
                 blog.text = null;
                 Date date = new Date();
                 date.setTime(blogData.getLong("creationTimeSeconds") * 1000);  // in millis
