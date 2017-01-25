@@ -17,7 +17,7 @@ import in.aviaryan.cfbuddy.ui.RecentBlogsFragment;
 import in.aviaryan.cfbuddy.utils.Helper;
 
 
-public class RecentBlogsParser implements Response.Listener<JSONObject> {
+public class RecentBlogsParser extends BaseParser implements Response.Listener<JSONObject> {
     private final String TAG = "CFLOG_RBP";
     private Fragment fragment;
 
