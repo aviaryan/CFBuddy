@@ -3,8 +3,7 @@ package in.aviaryan.cfbuddy.model;
 
 public class User {
     public String handle;
-    public String firstName;
-    public String lastName;
+    public String name;
     public String country;
     public String organisation;
     public String rank;
