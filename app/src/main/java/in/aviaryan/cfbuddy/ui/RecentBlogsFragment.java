@@ -82,7 +82,7 @@ public class RecentBlogsFragment extends Fragment
         String url = "http://codeforces.com/api/recentActions?maxCount=100";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, rbp, vel);
         queue.add(jsonObjectRequest);
-        queue.start();
+//        queue.start();
     }
 
     public void updateDisplayFromCache(String cache){
