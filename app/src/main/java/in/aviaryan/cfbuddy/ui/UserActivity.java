@@ -1,11 +1,14 @@
 package in.aviaryan.cfbuddy.ui;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -88,7 +91,7 @@ public class UserActivity extends AppCompatActivity {
             updateDisplay(userParser.parse(userParser.stringToJson(cache)) );
         }
     }
-
+    
     public void updateDisplay(User mUser) {
         Log.d(TAG, mUser.toString());
         user = mUser;
@@ -109,5 +112,26 @@ public class UserActivity extends AppCompatActivity {
         contentValues.put(Contract.Cache.COLUMN_DATA, data);
         contentValues.put(Contract.Cache.COLUMN_TIME, "");
         getContentResolver().insert(uri, contentValues);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.user, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+        Log.d(TAG, "what");
+
+        if (id == R.id.ua_action_settings){
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
+            return true;
+        } else if (id == R.id.action_search_profile){
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

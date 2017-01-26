@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!-- Search -->
+    <item
+        android:id="@+id/action_search_profile"
+        android:icon="@drawable/ic_search_white_24px"
+        android:title="@string/action_find_user"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/ua_action_settings"
+        android:orderInCategory="100"
+        android:title="@string/action_settings"
+        app:showAsAction="never" />
+</menu>
