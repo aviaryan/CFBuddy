@@ -67,10 +67,16 @@ public class RecentBlogsFragment extends Fragment
         mLinearLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
-        // in the end so that adapter is created
-        fetchRecentBlogs();
 
         getLoaderManager().initLoader(0, null, this);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        Log.d(TAG, "Activity created");
+        // in the end so that adapter is created
+        fetchRecentBlogs();
     }
 
     public void fetchRecentBlogs(){
@@ -98,6 +104,8 @@ public class RecentBlogsFragment extends Fragment
     }
 
     public void updateCache(String data){
+        if (getContext() == null)
+            return;
         Uri uri = Contract.Cache.URI;
         ContentValues contentValues = new ContentValues();
         contentValues.put(Contract.Cache.COLUMN_UID, URL);

@@ -1,6 +1,7 @@
 package in.aviaryan.cfbuddy.parser;
 
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.android.volley.Response;
@@ -10,20 +11,25 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import in.aviaryan.cfbuddy.model.User;
+import in.aviaryan.cfbuddy.ui.UserActivity;
 
 
 public class UserParser extends BaseParser implements Response.Listener<JSONObject> {
     private final String TAG = "CFLOG_UP";
-    private Fragment fragment;
+    private AppCompatActivity activity;
 
-    public UserParser(Fragment fragment){
-        this.fragment = fragment;
+    public UserParser(AppCompatActivity activity){
+        this.activity = activity;
     }
 
     @Override
     public void onResponse(JSONObject response) {
         Log.d(TAG, response.toString());
         User user = parse(response);
+        if (user != null){
+            ((UserActivity) activity).updateDisplay(user);
+            ((UserActivity) activity).updateCache(response.toString());
+        }
     }
 
     public User parse(JSONObject jsonObject){

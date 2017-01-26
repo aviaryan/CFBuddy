@@ -14,4 +14,11 @@
     <string name="pref_title_handle">Codeforces username</string>
     <string name="pref_title_challenges">Receive daily challenges</string>
     <string name="pref_description_challenges">Receive Codeforces Problem of the day notifications</string>
+    <string name="ua_label_handle">Handle</string>
+    <string name="ua_label_fullname">Full Name</string>
+    <string name="ua_label_rating">Rating</string>
+    <string name="ua_label_max_rating">Max Rating</string>
+    <string name="ua_label_org">Organization</string>
+    <string name="action_share">Share</string>
+    <string name="ua_label_country">Country</string>
 </resources>
