@@ -41,13 +41,24 @@
             android:name=".ui.SettingsActivity"
             android:label="@string/title_activity_settings" />
 
+        <!-- search user -->
+        <meta-data
+            android:name="android.app.default_searchable"
+            android:value=".ui.UserActivity" />
+
         <activity
             android:name=".ui.UserActivity"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter >
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.MainActivity" />
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/user_searchable" />
         </activity>
     </application>
 

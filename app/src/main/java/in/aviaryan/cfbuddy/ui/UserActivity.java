@@ -1,14 +1,19 @@
 package in.aviaryan.cfbuddy.ui;
 
+import android.app.SearchManager;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -29,6 +34,7 @@ import in.aviaryan.cfbuddy.utils.VolleyErrorListener;
 public class UserActivity extends AppCompatActivity {
 
     Toolbar mToolbar;
+    CollapsingToolbarLayout collapsingToolbarLayout;
     RequestQueue queue;
     private final String TAG = "CFLOG_UA";
     private final String URL = Contract.Cache.makeUIDFromRealUri("codeforces.com/api/user.info?handles=");
@@ -39,6 +45,7 @@ public class UserActivity extends AppCompatActivity {
     TextView organization;
     TextView country;
     ImageView avatar;
+    SearchView searchView;
 
     User user;
     UserParser userParser;
@@ -48,11 +55,13 @@ public class UserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
 
+        Log.d(TAG, "on create");
         user = new User();
         Log.d(TAG, getIntent().getStringExtra("handle"));
         user.handle = getIntent().getStringExtra("handle");
         mToolbar = (Toolbar) findViewById(R.id.ua_toolbar);
         mToolbar.setTitle(user.handle);
+        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.ua_col_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -101,6 +110,14 @@ public class UserActivity extends AppCompatActivity {
     public void updateDisplay(User mUser) {
         Log.d(TAG, mUser.toString());
         user = mUser;
+        // when collapsing toolbar and toolbar are used together
+        // then setTitle of ctl works
+        collapsingToolbarLayout.setTitle(user.handle);
+        // removes searchView active
+        mToolbar.setTitle(user.handle);
+        setSupportActionBar(mToolbar);
+        // others
+        handle.setText(user.handle);
         fullname.setText(user.name);
         rating.setText(user.rank + " (" + user.rating + ")");
         maxRating.setText(user.maxRank + " (" + user.maxRating + ")");
@@ -123,6 +140,29 @@ public class UserActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.user, menu);
+
+        // Associate searchable configuration with the SearchView
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        searchView = (SearchView) menu.findItem(R.id.action_search_profile).getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+
+        // Change color
+        // THINK later
+        searchView.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            }
+        });
+
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+//                mToolbar.setBackgroundColor(getResources().getColor(R.color.transparent));
+                return false;
+            }
+        });
+
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -139,5 +179,24 @@ public class UserActivity extends AppCompatActivity {
 
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        handleIntent(intent);
+    }
+
+    private void handleIntent(Intent intent) {
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            String query = intent.getStringExtra(SearchManager.QUERY);
+            user = new User();
+            user.handle = query;
+            Log.d(TAG, "search " + query);
+            queue.stop();
+            if (!searchView.isIconified()){
+                searchView.setIconified(true);
+            }
+            fetchUser();
+        }
     }
 }

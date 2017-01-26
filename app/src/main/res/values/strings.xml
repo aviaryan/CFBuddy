@@ -22,4 +22,6 @@
     <string name="action_share">Share</string>
     <string name="ua_label_country">Country</string>
     <string name="action_find_user">Find User</string>
+    <string name="user_search_hint">Codeforces handle</string>
+    <string name="search_label">Search Codeforces User</string>
 </resources>

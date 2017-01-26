@@ -6,7 +6,9 @@
         android:id="@+id/action_search_profile"
         android:icon="@drawable/ic_search_white_24px"
         android:title="@string/action_find_user"
-        app:showAsAction="ifRoom"/>
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        android:voiceSearchMode="showVoiceSearchButton|launchRecognizer"
+        app:showAsAction="always"/>
 
     <item
         android:id="@+id/ua_action_settings"
