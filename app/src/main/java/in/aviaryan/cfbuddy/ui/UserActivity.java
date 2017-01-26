@@ -91,7 +91,13 @@ public class UserActivity extends AppCompatActivity {
             updateDisplay(userParser.parse(userParser.stringToJson(cache)) );
         }
     }
-    
+
+    @Override
+    protected void onDestroy() {
+        queue.stop();
+        super.onDestroy();
+    }
+
     public void updateDisplay(User mUser) {
         Log.d(TAG, mUser.toString());
         user = mUser;
