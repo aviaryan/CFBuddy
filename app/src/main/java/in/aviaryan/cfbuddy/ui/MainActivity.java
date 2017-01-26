@@ -102,7 +102,11 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_manage) {
             displayFragment(new RecentBlogsFragment());
         } else if (id == R.id.nav_find_user) {
-
+            Intent intent = new Intent(this, UserActivity.class);
+            intent.putExtra("handle", prefUtils.getHandle());
+            intent.putExtra("searchEnabled", true);
+            startActivity(intent);
+            return true;
         } else if (id == R.id.nav_about) {
 
         }

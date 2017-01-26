@@ -38,6 +38,8 @@ public class UserActivity extends AppCompatActivity {
     RequestQueue queue;
     private final String TAG = "CFLOG_UA";
     private final String URL = Contract.Cache.makeUIDFromRealUri("codeforces.com/api/user.info?handles=");
+    private Boolean searchEnabled = false;
+    private Boolean searchIntentRecd = false;
     TextView handle;
     TextView fullname;
     TextView rating;
@@ -82,6 +84,11 @@ public class UserActivity extends AppCompatActivity {
         handle.setText(user.handle);
 
         fetchUser();
+
+        // if find user
+        if (getIntent().hasExtra("searchEnabled")){
+            searchEnabled = true;
+        }
     }
 
     public void fetchUser(){
@@ -114,8 +121,11 @@ public class UserActivity extends AppCompatActivity {
         // then setTitle of ctl works
         collapsingToolbarLayout.setTitle(user.handle);
         // removes searchView active
-        mToolbar.setTitle(user.handle);
-        setSupportActionBar(mToolbar);
+        if (searchIntentRecd){
+            searchIntentRecd = false;
+            mToolbar.setTitle(user.handle);
+            setSupportActionBar(mToolbar);
+        }
         // others
         handle.setText(user.handle);
         fullname.setText(user.name);
@@ -163,6 +173,11 @@ public class UserActivity extends AppCompatActivity {
             }
         });
 
+        if (searchEnabled){
+            searchEnabled = false;
+            searchView.setIconified(false);
+        }
+
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -193,6 +208,7 @@ public class UserActivity extends AppCompatActivity {
             user.handle = query;
             Log.d(TAG, "search " + query);
             queue.stop();
+            searchIntentRecd = true;
             if (!searchView.isIconified()){
                 searchView.setIconified(true);
             }
