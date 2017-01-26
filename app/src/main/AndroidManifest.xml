@@ -24,11 +24,20 @@
 
         <!-- content provider -->
         <provider
-            android:authorities="in.aviaryan.cfbuddy"
             android:name=".data.DataProvider"
+            android:authorities="in.aviaryan.cfbuddy"
             android:enabled="true"
-            android:exported="true">
-        </provider>
+            android:exported="true" />
+
+        <activity
+            android:name=".ui.BlogDetailActivity"
+            android:label="Blog Viewer"
+            android:launchMode="singleTop">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.MainActivity" />
+        </activity>
 
     </application>
 
