@@ -19,7 +19,7 @@
             android:id="@+id/bd_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/Base.TextAppearance.AppCompat.Title"
+            style="@style/TextAppearance.AppCompat.Title"
             tools:text="A blog post"/>
 
         <LinearLayout
@@ -31,7 +31,7 @@
                 android:id="@+id/bd_author"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/Base.TextAppearance.AppCompat.Subhead"
+                style="@style/TextAppearance.AppCompat.Subhead"
                 tools:text="by aviaryan"/>
 
             <TextView
@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginLeft="10dp"
-                style="@style/Base.TextAppearance.AppCompat.Small"
+                style="@style/TextAppearance.AppCompat.Small"
                 tools:text="3 days ago" />
 
         </LinearLayout>

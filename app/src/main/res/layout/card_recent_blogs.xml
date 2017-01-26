@@ -20,11 +20,13 @@
             android:layout_height="match_parent"
             android:gravity="center">
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/rb_thumb"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:src="@drawable/ic_menu_gallery" />
+                android:src="@drawable/ic_menu_gallery"
+                app:civ_border_width="0dp"/>
 
         </LinearLayout>
 
@@ -52,7 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="Jan 21, 2016"
-                style="@style/Base.TextAppearance.AppCompat.Body1"/>
+                style="@style/TextAppearance.AppCompat.Body1"/>
 
         </LinearLayout>
 
