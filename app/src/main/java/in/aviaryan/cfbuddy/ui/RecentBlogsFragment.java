@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +21,7 @@ import com.android.volley.toolbox.Volley;
 import java.util.ArrayList;
 
 import in.aviaryan.cfbuddy.R;
+import in.aviaryan.cfbuddy.adapter.RecentBlogsAdapter;
 import in.aviaryan.cfbuddy.data.Contract;
 import in.aviaryan.cfbuddy.model.Blog;
 import in.aviaryan.cfbuddy.parser.RecentBlogsParser;
@@ -30,6 +33,9 @@ public class RecentBlogsFragment extends Fragment {
     RequestQueue queue;
     private final String TAG = "CFLOG_RBF";
     private final String URL = Contract.Cache.makeUIDFromRealUri("codeforces.com/api/recentActions");
+    RecyclerView mRecyclerView;
+    RecentBlogsAdapter mAdapter;
+    private LinearLayoutManager mLinearLayoutManager;
 
     public RecentBlogsFragment() {
         // Required empty public constructor
@@ -48,6 +54,13 @@ public class RecentBlogsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         getActivity().setTitle(R.string.recent_blogs);
         fetchRecentBlogs();
+        // adapter
+        mAdapter = new RecentBlogsAdapter(getContext(), new ArrayList<Blog>());
+        // recycler view
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.rb_recycler_view);
+        mLinearLayoutManager = new LinearLayoutManager(getContext());
+        mRecyclerView.setLayoutManager(mLinearLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     public void fetchRecentBlogs(){
@@ -64,6 +77,8 @@ public class RecentBlogsFragment extends Fragment {
         for (Blog b: blogs) {
             Log.d(TAG, b.title);
         }
+        mAdapter.blogs = blogs;
+        mAdapter.notifyDataSetChanged();
     }
 
     public void updateCache(String data){

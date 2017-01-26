@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rb_card_item"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    android:background="@drawable/border">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/rb_thumb"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@drawable/ic_menu_gallery" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/rb_blog_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Some blog title"
+                style="@style/TextAppearance.AppCompat.Subhead"/>
+
+            <TextView
+                android:id="@+id/rb_blog_author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="\@handle"
+                style="@style/TextAppearance.AppCompat.Body1"/>
+
+            <TextView
+                android:id="@+id/rb_blog_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Jan 21, 2016"
+                style="@style/Base.TextAppearance.AppCompat.Body1"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
