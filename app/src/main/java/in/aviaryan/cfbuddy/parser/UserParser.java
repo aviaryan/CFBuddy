@@ -43,6 +43,7 @@ public class UserParser extends BaseParser implements Response.Listener<JSONObje
             user.country = safeGetItem(profileObject, "country");
             user.organisation = safeGetItem(profileObject, "organization");
             user.avatar = profileObject.getString("titlePhoto");
+            user.smallAvatar = profileObject.getString("avatar");
             user.handle = profileObject.getString("handle");
             user.rank = profileObject.getString("rank");
             user.rating = profileObject.getInt("rating");

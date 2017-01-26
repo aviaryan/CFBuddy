@@ -11,4 +11,5 @@ public class User {
     public String maxRank;
     public int maxRating;
     public String avatar;
+    public String smallAvatar;  // avatar in API
 }
