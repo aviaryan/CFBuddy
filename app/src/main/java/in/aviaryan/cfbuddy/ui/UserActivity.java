@@ -6,12 +6,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 
 import in.aviaryan.cfbuddy.R;
 import in.aviaryan.cfbuddy.data.Contract;
@@ -33,6 +35,7 @@ public class UserActivity extends AppCompatActivity {
     TextView maxRating;
     TextView organization;
     TextView country;
+    ImageView avatar;
 
     User user;
     UserParser userParser;
@@ -61,6 +64,7 @@ public class UserActivity extends AppCompatActivity {
         maxRating = (TextView) findViewById(R.id.ua_max_rating);
         organization = (TextView) findViewById(R.id.ua_org);
         country = (TextView) findViewById(R.id.ua_country);
+        avatar = (ImageView) findViewById(R.id.ua_photo);
 
         // set text
         handle.setText(user.handle);
@@ -93,6 +97,9 @@ public class UserActivity extends AppCompatActivity {
         maxRating.setText(user.maxRank + " (" + user.maxRating + ")");
         organization.setText(user.organisation);
         country.setText(user.country);
+        Glide.with(this).load(user.avatar)
+                .centerCrop().placeholder(R.drawable.ic_menu_gallery)
+                .crossFade().into(avatar);
     }
 
     public void updateCache(String data){
