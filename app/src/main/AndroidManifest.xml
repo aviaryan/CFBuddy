@@ -33,12 +33,13 @@
             android:name=".ui.BlogDetailActivity"
             android:label="Blog Viewer"
             android:launchMode="singleTop">
-
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.MainActivity" />
         </activity>
-
+        <activity
+            android:name=".ui.SettingsActivity"
+            android:label="@string/title_activity_settings"></activity>
     </application>
 
 </manifest>

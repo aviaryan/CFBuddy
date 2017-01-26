@@ -6,4 +6,12 @@
 
     <string name="action_settings">Settings</string>
     <string name="recent_blogs">Recent Blogs</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Strings related to Settings -->
+
+    <string name="pref_default_handle">aviaryan</string>
+    <string name="pref_title_handle">Codeforces username</string>
+    <string name="pref_title_challenges">Receive daily challenges</string>
+    <string name="pref_description_challenges">Receive Codeforces Problem of the day notifications</string>
 </resources>
