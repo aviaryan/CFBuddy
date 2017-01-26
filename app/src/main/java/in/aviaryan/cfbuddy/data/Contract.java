@@ -20,7 +20,7 @@ public final class Contract {
 
         public static final Uri URI = BASE_URI.buildUpon().appendPath(PATH_CACHE).build();
         public static final String COLUMN_UID = "uid";
-        public static final String COLUMN_DATA = "date";
+        public static final String COLUMN_DATA = "data";
         public static final String COLUMN_TIME = "time";
         public static final String COLUMN_ID = "_id";
 
