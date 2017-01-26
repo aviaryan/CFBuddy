@@ -12,6 +12,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 
 import in.aviaryan.cfbuddy.model.Blog;
 import in.aviaryan.cfbuddy.ui.RecentBlogsFragment;
@@ -42,6 +43,8 @@ public class RecentBlogsParser extends BaseParser implements Response.Listener<J
 
         try {
             JSONArray result = jsonObject.getJSONArray("result");
+            HashSet<Integer> blogSet = new HashSet<>(); // for duplicates
+
             for (int i=0; i<result.length(); i++){
                 JSONObject blogData = result.getJSONObject(i).getJSONObject("blogEntry");
                 Blog blog = new Blog();
@@ -52,6 +55,11 @@ public class RecentBlogsParser extends BaseParser implements Response.Listener<J
                 Date date = new Date();
                 date.setTime(blogData.getLong("creationTimeSeconds") * 1000);  // in millis
                 blog.time = date;
+                if (blogSet.contains(blog.id)){
+                    continue;
+                } else {
+                    blogSet.add(blog.id);
+                }
 
                 blogs.add(blog);
             }
