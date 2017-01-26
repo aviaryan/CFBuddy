@@ -21,6 +21,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- content provider -->
+        <provider
+            android:authorities="in.aviaryan.cfbuddy"
+            android:name=".data.DataProvider"
+            android:enabled="true"
+            android:exported="true">
+        </provider>
+
     </application>
 
 </manifest>

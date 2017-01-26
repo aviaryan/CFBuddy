@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -22,9 +21,7 @@ import in.aviaryan.cfbuddy.model.Blog;
 import in.aviaryan.cfbuddy.parser.RecentBlogsParser;
 import in.aviaryan.cfbuddy.utils.VolleyErrorListener;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class RecentBlogsFragment extends Fragment {
 
     RequestQueue queue;
