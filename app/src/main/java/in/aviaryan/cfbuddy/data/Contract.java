@@ -24,6 +24,8 @@ public final class Contract {
         public static final String COLUMN_TIME = "time";
         public static final String COLUMN_ID = "_id";
 
+        public static final int POSITION_DATA = 2;   // see SQLiteHelper
+
         public static final String TABLE_NAME = "cache";
 
         public static Uri makeUriForUID(String uid){
