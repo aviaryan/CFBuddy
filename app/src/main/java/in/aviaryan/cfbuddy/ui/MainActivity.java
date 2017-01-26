@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import in.aviaryan.cfbuddy.R;
 import in.aviaryan.cfbuddy.data.PrefUtils;
@@ -43,6 +44,9 @@ public class MainActivity extends AppCompatActivity
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        // set handle in nav view
+        ((TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_handle)).setText(prefUtils.getHandle());
 
         // display default
         displayFragment(new RecentBlogsFragment());
