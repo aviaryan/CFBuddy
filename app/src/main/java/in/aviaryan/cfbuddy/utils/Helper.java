@@ -1,7 +1,9 @@
 package in.aviaryan.cfbuddy.utils;
 
 import android.content.ContentResolver;
+import android.content.Context;
 import android.database.Cursor;
+import android.support.v4.content.CursorLoader;
 import android.util.Log;
 
 import org.jsoup.Jsoup;
@@ -17,10 +19,13 @@ public class Helper {
     }
 
     public static String getCache(ContentResolver contentResolver, String url){
-        Cursor cursor = contentResolver.query(
+        return getCacheFromCursor(contentResolver.query(
                 Contract.Cache.makeUriForUID(url),
                 null, null, null, null
-        );
+        ));
+    }
+
+    public static String getCacheFromCursor(Cursor cursor){
         if (cursor == null)
             return null;
         if (cursor.moveToNext()){
@@ -32,5 +37,10 @@ public class Helper {
             cursor.close();
             return null;
         }
+    }
+
+    public static CursorLoader getCacheLoader(Context context, String url){
+        return new CursorLoader(context, Contract.Cache.makeUriForUID(url),
+                null, null, null, null);
     }
 }

@@ -8,6 +8,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -31,13 +33,15 @@ import in.aviaryan.cfbuddy.utils.Helper;
 import in.aviaryan.cfbuddy.utils.VolleyErrorListener;
 
 
-public class RecentBlogsFragment extends Fragment {
+public class RecentBlogsFragment extends Fragment
+    implements LoaderManager.LoaderCallbacks<Cursor> {
 
     RequestQueue queue;
     private final String TAG = "CFLOG_RBF";
     private final String URL = Contract.Cache.makeUIDFromRealUri("codeforces.com/api/recentActions");
     RecyclerView mRecyclerView;
     RecentBlogsAdapter mAdapter;
+    RecentBlogsParser rbp;
     private LinearLayoutManager mLinearLayoutManager;
 
     public RecentBlogsFragment() {
@@ -65,16 +69,15 @@ public class RecentBlogsFragment extends Fragment {
         mRecyclerView.setAdapter(mAdapter);
         // in the end so that adapter is created
         fetchRecentBlogs();
+
+        getLoaderManager().initLoader(0, null, this);
     }
 
     public void fetchRecentBlogs(){
         VolleyErrorListener vel = new VolleyErrorListener(getContext());
-        RecentBlogsParser rbp = new RecentBlogsParser(this);
+        rbp = new RecentBlogsParser(this);
         // cache
-        String cache = Helper.getCache(getContext().getContentResolver(), URL);
-        if (cache != null){
-            updateData( rbp.parse(rbp.stringToJson(cache)) );
-        }
+        updateDisplayFromCache(Helper.getCache(getContext().getContentResolver(), URL));
         // request
         String url = "http://codeforces.com/api/recentActions?maxCount=100";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, rbp, vel);
@@ -82,7 +85,13 @@ public class RecentBlogsFragment extends Fragment {
         queue.start();
     }
 
-    public void updateData(ArrayList<Blog> blogs) {
+    public void updateDisplayFromCache(String cache){
+        if (cache != null){
+            updateDisplay( rbp.parse(rbp.stringToJson(cache)) );
+        }
+    }
+
+    public void updateDisplay(ArrayList<Blog> blogs) {
         Log.d(TAG, blogs.toString());
         mAdapter.blogs = blogs;
         mAdapter.notifyDataSetChanged();
@@ -95,5 +104,20 @@ public class RecentBlogsFragment extends Fragment {
         contentValues.put(Contract.Cache.COLUMN_DATA, data);
         contentValues.put(Contract.Cache.COLUMN_TIME, "");
         getContext().getContentResolver().insert(uri, contentValues);
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        return Helper.getCacheLoader(getContext(), URL);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        updateDisplayFromCache(Helper.getCacheFromCursor(data));
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+
     }
 }
