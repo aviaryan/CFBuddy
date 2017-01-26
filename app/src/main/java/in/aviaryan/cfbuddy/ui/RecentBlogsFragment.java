@@ -1,6 +1,8 @@
 package in.aviaryan.cfbuddy.ui;
 
 
+import android.content.ContentValues;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,6 +19,7 @@ import com.android.volley.toolbox.Volley;
 import java.util.ArrayList;
 
 import in.aviaryan.cfbuddy.R;
+import in.aviaryan.cfbuddy.data.Contract;
 import in.aviaryan.cfbuddy.model.Blog;
 import in.aviaryan.cfbuddy.parser.RecentBlogsParser;
 import in.aviaryan.cfbuddy.utils.VolleyErrorListener;
@@ -26,6 +29,7 @@ public class RecentBlogsFragment extends Fragment {
 
     RequestQueue queue;
     private final String TAG = "CFLOG_RBF";
+    private final String URL = Contract.Cache.makeUIDFromRealUri("codeforces.com/api/recentActions");
 
     public RecentBlogsFragment() {
         // Required empty public constructor
@@ -60,5 +64,14 @@ public class RecentBlogsFragment extends Fragment {
         for (Blog b: blogs) {
             Log.d(TAG, b.title);
         }
+    }
+
+    public void updateCache(String data){
+        Uri uri = Contract.Cache.URI;
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(Contract.Cache.COLUMN_UID, URL);
+        contentValues.put(Contract.Cache.COLUMN_DATA, data);
+        contentValues.put(Contract.Cache.COLUMN_TIME, "");
+        getContext().getContentResolver().insert(uri, contentValues);
     }
 }

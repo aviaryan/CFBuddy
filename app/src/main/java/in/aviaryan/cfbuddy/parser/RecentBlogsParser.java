@@ -33,6 +33,7 @@ public class RecentBlogsParser extends BaseParser implements Response.Listener<J
         FirebaseCrash.log("tada");  // TODO: remove this
         if (blogs != null) {
             ((RecentBlogsFragment) fragment).updateData(blogs);
+            ((RecentBlogsFragment) fragment).updateCache(response.toString());
         }
     }
 
