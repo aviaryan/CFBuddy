@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
@@ -15,8 +16,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import in.aviaryan.cfbuddy.R;
 import in.aviaryan.cfbuddy.data.PrefUtils;
 
@@ -25,6 +28,7 @@ public class MainActivity extends AppCompatActivity
 
     NavigationView navigationView;
     PrefUtils prefUtils;
+    CircleImageView userImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +49,14 @@ public class MainActivity extends AppCompatActivity
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        View headerView = navigationView.getHeaderView(0);
         // set handle in nav view
-        ((TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_handle)).setText(prefUtils.getHandle());
+        ((TextView) headerView.findViewById(R.id.nav_handle)).setText(prefUtils.getHandle());
+        // http://stackoverflow.com/questions/36867298/using-android-vector-drawables-on-pre-lollipop-crash
+        VectorDrawableCompat vc = VectorDrawableCompat.create(getResources(), R.drawable.ic_account_circle_accent_24px, getTheme());
+        userImage = (CircleImageView) headerView.findViewById(R.id.nav_image_view);
+        userImage.setImageDrawable(vc);
+        userImage.setDisableCircularTransformation(true);
 
         // display default
         displayFragment(new RecentBlogsFragment());
