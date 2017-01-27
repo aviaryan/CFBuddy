@@ -4,6 +4,7 @@ package in.aviaryan.cfbuddy.model;
 public class User {
     public String handle;
     public String name;
+    public String city;
     public String country;
     public String organisation;
     public String rank;

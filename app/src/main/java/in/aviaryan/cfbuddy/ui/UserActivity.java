@@ -46,6 +46,7 @@ public class UserActivity extends AppCompatActivity {
     TextView maxRating;
     TextView organization;
     TextView country;
+    TextView city;
     ImageView avatar;
     SearchView searchView;
 
@@ -79,6 +80,7 @@ public class UserActivity extends AppCompatActivity {
         organization = (TextView) findViewById(R.id.ua_org);
         country = (TextView) findViewById(R.id.ua_country);
         avatar = (ImageView) findViewById(R.id.ua_photo);
+        city = (TextView) findViewById(R.id.ua_city);
 
         // set text
         handle.setText(user.handle);
@@ -133,11 +135,16 @@ public class UserActivity extends AppCompatActivity {
         fullname.setText(user.name);
         rating.setText(user.rank + " (" + user.rating + ")");
         maxRating.setText(user.maxRank + " (" + user.maxRating + ")");
-        organization.setText(user.organisation);
-        country.setText(user.country);
+        organization.setText(undForNull(user.organisation));
+        country.setText(undForNull(user.country));
+        city.setText(undForNull(user.city));
         Glide.with(this).load(user.avatar)
                 .centerCrop().placeholder(R.drawable.ic_account_circle_accent_24px)
                 .crossFade().into(avatar);
+    }
+
+    private String undForNull(String s){
+        return (s == null) ? "undefined" : s;
     }
 
     public void updateCache(String data){

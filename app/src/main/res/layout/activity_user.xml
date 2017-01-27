@@ -115,6 +115,16 @@
 
             <LinearLayout style="@style/userProperty">
                 <TextView
+                    android:id="@+id/ua_city"
+                    style="@style/userData"
+                    tools:text="Gandhinagar" />
+                <TextView
+                    style="@style/userValue"
+                    android:text="@string/ua_label_city" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/userProperty">
+                <TextView
                     android:id="@+id/ua_country"
                     style="@style/userData"
                     tools:text="India" />
