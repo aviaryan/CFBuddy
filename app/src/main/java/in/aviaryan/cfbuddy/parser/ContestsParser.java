@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import in.aviaryan.cfbuddy.model.Contest;
+import in.aviaryan.cfbuddy.ui.ContestsFragment;
 
 
 public class ContestsParser extends BaseParser implements Response.Listener<JSONObject> {
@@ -28,6 +29,10 @@ public class ContestsParser extends BaseParser implements Response.Listener<JSON
     public void onResponse(JSONObject response) {
         Log.d(TAG, response.toString());
         ArrayList<Contest> contests = parse(response);
+        if (contests != null){
+            ((ContestsFragment) fragment).updateDisplay(contests);
+            ((ContestsFragment) fragment).updateCache(response.toString());
+        }
     }
 
     public ArrayList<Contest> parse(JSONObject jsonObject){
