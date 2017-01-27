@@ -1,6 +1,7 @@
 package in.aviaryan.cfbuddy.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,10 +10,14 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.parceler.Parcels;
+
 import java.util.ArrayList;
 
 import in.aviaryan.cfbuddy.R;
 import in.aviaryan.cfbuddy.model.Problem;
+import in.aviaryan.cfbuddy.ui.BlogDetailActivity;
+import in.aviaryan.cfbuddy.ui.ProblemDetailActivity;
 
 
 public class ProblemsAdapter extends RecyclerView.Adapter<ProblemsAdapter.MyViewHolder> {
@@ -73,6 +78,9 @@ public class ProblemsAdapter extends RecyclerView.Adapter<ProblemsAdapter.MyView
             @Override
             public void onClick(View view) {
                 Log.d(TAG, problem.name);
+                Intent intent = new Intent(mContext, ProblemDetailActivity.class);
+                intent.putExtra("problem", Parcels.wrap(problem));
+                mContext.startActivity(intent);
             }
         });
     }

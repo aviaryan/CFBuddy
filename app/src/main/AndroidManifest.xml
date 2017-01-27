@@ -50,15 +50,24 @@
             android:name=".ui.UserActivity"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter >
+            <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
+
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.MainActivity" />
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/user_searchable" />
+        </activity>
+        <activity
+            android:name=".ui.ProblemDetailActivity"
+            android:launchMode="singleTop"
+            android:label="@string/label_problem_details">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.MainActivity" />
         </activity>
     </application>
 

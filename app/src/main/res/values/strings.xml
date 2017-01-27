@@ -41,4 +41,5 @@
     <string name="label_find_user">Find user</string>
     <string name="label_about">About</string>
     <string name="title_problems">Problems</string>
+    <string name="label_problem_details">Problem Details</string>
 </resources>

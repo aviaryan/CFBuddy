@@ -109,7 +109,7 @@ public class ProblemsFragment extends Fragment
     }
 
     public void updateDisplay(ArrayList<Problem> problems) {
-        Log.d(TAG, problems.toString());
+//        Log.d(TAG, problems.toString());
         mAdapter.problems = problems;
         mAdapter.notifyDataSetChanged();
     }
@@ -132,6 +132,7 @@ public class ProblemsFragment extends Fragment
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        // Already updated actually
         updateDisplayFromCache(Helper.getCacheFromCursor(data));
     }
 
