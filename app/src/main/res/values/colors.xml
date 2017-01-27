@@ -7,4 +7,5 @@
 
     <color name="ltgray">#ffe0e0e0</color>
     <color name="transparent">#00000000</color>
+    <color name="gray">@android:color/darker_gray</color>
 </resources>

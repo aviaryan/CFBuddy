@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
             return true;
         } else if (id == R.id.nav_problems) {
-
+            displayFragment(new ProblemsFragment());
         } else if (id == R.id.nav_contests) {
             displayFragment(new ContestsFragment());
         } else if (id == R.id.nav_blogs) {

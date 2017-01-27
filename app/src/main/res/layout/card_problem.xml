@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/pb_card_item"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp"
+    android:background="@drawable/border">
+
+    <LinearLayout
+        android:layout_width="64dp"
+        android:layout_marginLeft="16dp"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/pb_problem_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            style="@style/TextAppearance.AppCompat.Subhead"
+            tools:text="732C"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/pb_problem_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Ram and the Lanka Problem"
+            style="@style/TextAppearance.AppCompat.Subhead"/>
+
+        <TextView
+            android:id="@+id/pb_problem_tags"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="dp, maths"
+            style="@style/TextAppearance.AppCompat.Body1"/>
+
+        <TextView
+            android:id="@+id/pb_problem_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="x2223"
+            style="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@color/gray"/>
+
+    </LinearLayout>
+
+</LinearLayout>
