@@ -9,8 +9,10 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -47,7 +49,11 @@ public class ProblemsFragment extends Fragment
     RecyclerView mRecyclerView;
     ProblemsParser pp;
     ProblemsAdapter mAdapter;
+    SearchView searchView;
+    Boolean inSearch = false;
+    Boolean blockUpdate = false;
     private LinearLayoutManager mLinearLayoutManager;
+    ArrayList<Problem> fullProblems;
 
     public ProblemsFragment() {
         // Required empty public constructor
@@ -66,6 +72,7 @@ public class ProblemsFragment extends Fragment
         super.onViewCreated(view, savedInstanceState);
         getActivity().setTitle(R.string.title_problems);
         // adapter
+        fullProblems = new ArrayList<>();
         mAdapter = new ProblemsAdapter(getContext(), new ArrayList<Problem>());
         // recycler view
         mRecyclerView = (RecyclerView) view.findViewById(R.id.pb_recycler_view);
@@ -119,6 +126,10 @@ public class ProblemsFragment extends Fragment
 
     public void updateDisplay(ArrayList<Problem> problems) {
 //        Log.d(TAG, problems.toString());
+        if (blockUpdate && inSearch)  // happens when async call of data request
+            return;
+        if (!blockUpdate)  // happens only when async call
+            fullProblems = problems;
         mAdapter.problems = problems;
         mAdapter.notifyDataSetChanged();
     }
@@ -154,14 +165,77 @@ public class ProblemsFragment extends Fragment
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_problems, menu);
         super.onCreateOptionsMenu(menu, inflater);
+
+        // Thanks
+        // http://stackoverflow.com/questions/34291453/adding-searchview-in-fragment
+        MenuItem item = menu.findItem(R.id.action_filter_problem);
+        SearchView searchView = new SearchView(((MainActivity) getContext()).getSupportActionBar().getThemedContext());
+        MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW | MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
+        MenuItemCompat.setActionView(item, searchView);
+        searchView.setQueryHint(getString(R.string.problem_search_hint));
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Log.d(TAG, query);
+                filterProblems(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+        // http://stackoverflow.com/questions/9327826/searchviews-oncloselistener-doesnt-work
+        MenuItemCompat.setOnActionExpandListener(item, new MenuItemCompat.OnActionExpandListener() {
+            @Override
+            public boolean onMenuItemActionExpand(MenuItem item) {
+                return true;
+            }
+
+            @Override
+            public boolean onMenuItemActionCollapse(MenuItem item) {
+                Log.d(TAG, "closed");
+                inSearch = false;
+                blockUpdate = false;
+                updateDisplay(fullProblems);
+                return true;
+            }
+        });
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_filter_problem){
-            Log.d(TAG, "click search");
-        }
+//        if (id == R.id.action_filter_problem){
+//        }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void filterProblems(String query){
+        if (query.equals(""))
+            return;
+        blockUpdate = true;
+        inSearch = true;
+        String [] queries = query.split(";");
+        ArrayList<Problem> newProblems = new ArrayList<>();
+        Boolean fail;
+        for (Problem problem: fullProblems){
+            fail = false;
+            for (String q: queries){
+                if (!(problem.tags.contains(q) || (problem.contestId + problem.index).contains(q))) {
+                    fail = true;
+                    break;
+                }
+            }
+            if (!fail)
+                newProblems.add(problem);
+        }
+        // update
+        inSearch = false;
+        updateDisplay(newProblems);
+        inSearch = true;
     }
 }
