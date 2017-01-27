@@ -34,4 +34,10 @@
     <string name="about_author">Made by Avi Aryan</string>
     <string name="title_about">About</string>
     <string name="ua_label_city">City</string>
+    <string name="drawer_profile">Profile</string>
+    <string name="label_problems">Problems</string>
+    <string name="label_contests">Contests</string>
+    <string name="label_recent_blogs">Recent Blogs</string>
+    <string name="label_find_user">Find user</string>
+    <string name="label_about">About</string>
 </resources>

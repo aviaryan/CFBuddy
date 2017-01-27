@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity
 
         // display default
         displayFragment(new RecentBlogsFragment());
-        navigationView.setCheckedItem(R.id.nav_manage);
+        navigationView.setCheckedItem(R.id.nav_blogs);
     }
 
 
@@ -104,16 +104,16 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_profile) {
             Intent intent = new Intent(this, UserActivity.class);
             intent.putExtra("handle", prefUtils.getHandle());
             startActivity(intent);
             return true;
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_problems) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_contests) {
             displayFragment(new ContestsFragment());
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_blogs) {
             displayFragment(new RecentBlogsFragment());
         } else if (id == R.id.nav_find_user) {
             Intent intent = new Intent(this, UserActivity.class);
