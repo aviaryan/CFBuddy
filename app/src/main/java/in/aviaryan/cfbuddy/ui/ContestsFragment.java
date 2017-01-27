@@ -106,12 +106,7 @@ public class ContestsFragment extends Fragment
     public void updateCache(String data){
         if (getContext() == null)
             return;
-        Uri uri = Contract.Cache.URI;
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(Contract.Cache.COLUMN_UID, URL);
-        contentValues.put(Contract.Cache.COLUMN_DATA, data);
-        contentValues.put(Contract.Cache.COLUMN_TIME, "");
-        getContext().getContentResolver().insert(uri, contentValues);
+        Helper.updateCache(data, getContext().getContentResolver(), URL);
     }
 
     @Override

@@ -148,12 +148,7 @@ public class UserActivity extends AppCompatActivity {
     }
 
     public void updateCache(String data){
-        Uri uri = Contract.Cache.URI;
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(Contract.Cache.COLUMN_UID, URL + user.handle);  // make full url
-        contentValues.put(Contract.Cache.COLUMN_DATA, data);
-        contentValues.put(Contract.Cache.COLUMN_TIME, "");
-        getContentResolver().insert(uri, contentValues);
+        Helper.updateCache(data, getContentResolver(), URL + user.handle);
     }
 
     @Override

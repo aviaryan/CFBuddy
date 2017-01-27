@@ -86,11 +86,6 @@ public class ProblemDetailActivity extends AppCompatActivity {
     }
 
     public void updateCache(String data){
-        Uri uri = Contract.Cache.URI;
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(Contract.Cache.COLUMN_UID, URL + problem.contestId + problem.index);  // make full url
-        contentValues.put(Contract.Cache.COLUMN_DATA, data);
-        contentValues.put(Contract.Cache.COLUMN_TIME, "");
-        getContentResolver().insert(uri, contentValues);
+        Helper.updateCache(data, getContentResolver(), URL + problem.contestId + problem.index);
     }
 }

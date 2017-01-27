@@ -22,6 +22,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import in.aviaryan.cfbuddy.R;
 import in.aviaryan.cfbuddy.data.PrefUtils;
 
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 

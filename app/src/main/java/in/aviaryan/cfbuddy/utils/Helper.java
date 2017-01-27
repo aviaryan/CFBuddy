@@ -1,8 +1,10 @@
 package in.aviaryan.cfbuddy.utils;
 
 import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.net.Uri;
 import android.support.v4.content.CursorLoader;
 import android.util.Log;
 
@@ -90,5 +92,17 @@ public class Helper {
             s = "0" + s;
         }
         return s;
+    }
+
+    /*
+     * Updates the cache
+     */
+    public static void updateCache(String data, ContentResolver contentResolver, String url){
+        Uri uri = Contract.Cache.URI;
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(Contract.Cache.COLUMN_UID, url);  // give full url
+        contentValues.put(Contract.Cache.COLUMN_DATA, data);
+        contentValues.put(Contract.Cache.COLUMN_TIME, "");
+        contentResolver.insert(uri, contentValues);
     }
 }
