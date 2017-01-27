@@ -24,4 +24,7 @@
     <string name="action_find_user">Find User</string>
     <string name="user_search_hint">Codeforces handle</string>
     <string name="search_label">Search Codeforces User</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

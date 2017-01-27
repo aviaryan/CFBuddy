@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cs_card_item"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:background="@drawable/border">
+
+    <TextView
+        android:id="@+id/cs_contest_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Edu Hack 2017"
+        style="@style/TextAppearance.AppCompat.Subhead"
+        android:textColor="@color/colorPrimaryLight"/>
+
+    <TextView
+        android:id="@+id/cs_contest_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Jan 21, 2016 at 10:00 hours"
+        style="@style/TextAppearance.AppCompat.Body1"/>
+
+    <TextView
+        android:id="@+id/cs_contest_duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="2 hours"
+        style="@style/TextAppearance.AppCompat.Body1" />
+
+</LinearLayout>

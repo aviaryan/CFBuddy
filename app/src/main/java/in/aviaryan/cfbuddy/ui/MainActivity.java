@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
-
+            displayFragment(new ContestsFragment());
         } else if (id == R.id.nav_manage) {
             displayFragment(new RecentBlogsFragment());
         } else if (id == R.id.nav_find_user) {
