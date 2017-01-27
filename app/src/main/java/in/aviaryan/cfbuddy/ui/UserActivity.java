@@ -116,6 +116,8 @@ public class UserActivity extends AppCompatActivity {
 
     public void updateDisplay(User mUser) {
         Log.d(TAG, mUser.toString());
+        if (!user.handle.equals(mUser.handle))  // edge case, old callbacks
+            return;
         user = mUser;
         // when collapsing toolbar and toolbar are used together
         // then setTitle of ctl works
