@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import in.aviaryan.cfbuddy.model.Problem;
+import in.aviaryan.cfbuddy.ui.ProblemsFragment;
 
 
 public class ProblemsParser extends BaseParser implements Response.Listener<JSONObject> {
@@ -28,6 +29,10 @@ public class ProblemsParser extends BaseParser implements Response.Listener<JSON
     public void onResponse(JSONObject response) {
         Log.d(TAG, response.toString());
         ArrayList<Problem> problems = parse(response);
+        if (problems != null){
+            ((ProblemsFragment) fragment).updateDisplay(problems);
+            ((ProblemsFragment) fragment).updateCache(response.toString());
+        }
     }
 
     public ArrayList<Problem> parse(JSONObject jsonObject){
@@ -54,7 +59,12 @@ public class ProblemsParser extends BaseParser implements Response.Listener<JSON
                 problem.index = jsObj.getString("index");
                 problem.name = jsObj.getString("name");
                 problem.problemText = null;
-                problem.solvedCount = problemToSolved.get(problem.contestId + problem.name);
+                if (problemToSolved.containsKey(problem.contestId + problem.index))
+                    problem.solvedCount = problemToSolved.get(problem.contestId + problem.index);
+                else {
+                    problem.solvedCount = 0;
+                    FirebaseCrash.log("ProblemsParser: No solved count for Problem " + problem.contestId + problem.index);
+                }
                 // tags
                 JSONArray tagsArray = jsObj.getJSONArray("tags");
                 ArrayList<String> tags = new ArrayList<>();
