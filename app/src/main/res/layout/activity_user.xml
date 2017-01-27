@@ -25,6 +25,7 @@
             app:contentScrim="@color/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
+            <!-- appCompatImageView automatically used (see source) -->
             <ImageView
                 android:id="@+id/ua_photo"
                 android:layout_width="match_parent"
