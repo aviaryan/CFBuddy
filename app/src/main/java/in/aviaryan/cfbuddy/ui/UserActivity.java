@@ -136,7 +136,7 @@ public class UserActivity extends AppCompatActivity {
         organization.setText(user.organisation);
         country.setText(user.country);
         Glide.with(this).load(user.avatar)
-                .centerCrop().placeholder(R.drawable.ic_menu_gallery)
+                .centerCrop().placeholder(R.drawable.ic_account_circle_accent_24px)
                 .crossFade().into(avatar);
     }
 
@@ -209,7 +209,7 @@ public class UserActivity extends AppCompatActivity {
             user = new User();
             user.handle = query;
             Log.d(TAG, "search " + query);
-            queue.stop();
+//            queue.stop();  // not needed now as old is already checked in updateDisplay
             searchIntentRecd = true;
             if (!searchView.isIconified()){
                 searchView.setIconified(true);
