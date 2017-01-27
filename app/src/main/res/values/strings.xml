@@ -42,4 +42,5 @@
     <string name="label_about">About</string>
     <string name="title_problems">Problems</string>
     <string name="label_problem_details">Problem Details</string>
+    <string name="action_filter_problem">Filter Problems</string>
 </resources>
