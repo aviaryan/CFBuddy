@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import in.aviaryan.cfbuddy.R;
 import in.aviaryan.cfbuddy.model.Contest;
+import in.aviaryan.cfbuddy.utils.Helper;
 import in.aviaryan.cfbuddy.utils.OpenUrlOnClickListener;
 
 
@@ -58,8 +59,8 @@ public class ContestsAdapter extends RecyclerView.Adapter<ContestsAdapter.MyView
     public void onBindViewHolder(ContestsAdapter.MyViewHolder holder, int position) {
         final Contest contest = contests.get(position);
         holder.title.setText(contest.name);
-        holder.duration.setText(contest.durationSeconds + "");
-        holder.time.setText(contest.startTime + "");
+        holder.duration.setText(Helper.humanizeSecondsAccurate(contest.durationSeconds));
+        holder.time.setText(Helper.dateToStr(contest.startTime));
         holder.cardItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -6,8 +6,13 @@ import android.database.Cursor;
 import android.support.v4.content.CursorLoader;
 import android.util.Log;
 
+import com.google.firebase.crash.FirebaseCrash;
+
 import org.jsoup.Jsoup;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import in.aviaryan.cfbuddy.data.Contract;
@@ -62,7 +67,28 @@ public class Helper {
         } else if (diffSecs < 60*60*24*30*24){
             return diffSecs/(60*60*24*30) + " months ago";
         } else {
-            return diffSecs/(60*60*24*30*365) + " years ago";
+            return diffSecs/(60*60*24*365) + " years ago";
         }
+    }
+
+    public static String humanizeSecondsAccurate(int seconds){
+        return padWithZeros((seconds/3600) + "", 2)
+                    + ":" + padWithZeros((seconds%60) + "", 2) + " hours";
+    }
+
+    public static String dateToStr(Date date){
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(date.getTime() + 60*60*5 * 1000);  // don't know why
+        // but 5 hours timezone is added maybe MST*2
+        date = cal.getTime();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        return dateFormat.format(date) + " UTC";
+    }
+
+    public static String padWithZeros(String s, int zc){
+        while (s.length() < zc){
+            s = "0" + s;
+        }
+        return s;
     }
 }
