@@ -19,6 +19,8 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.messaging.FirebaseMessaging;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 import in.aviaryan.cfbuddy.R;
 import in.aviaryan.cfbuddy.data.PrefUtils;
@@ -39,6 +41,7 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         prefUtils = new PrefUtils(this);
 
+        FirebaseMessaging.getInstance().subscribeToTopic("POTD");  // Problem of the day
         // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
