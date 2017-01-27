@@ -6,7 +6,6 @@ import android.os.Bundle;
 import org.parceler.Parcels;
 
 import in.aviaryan.cfbuddy.R;
-import in.aviaryan.cfbuddy.model.Blog;
 import in.aviaryan.cfbuddy.model.Problem;
 
 

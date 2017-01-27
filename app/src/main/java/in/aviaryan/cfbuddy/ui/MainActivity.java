@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity
     NavigationView navigationView;
     PrefUtils prefUtils;
     CircleImageView userImage;
+    private static String lastState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +59,7 @@ public class MainActivity extends AppCompatActivity
         userImage.setImageDrawable(vc);
         userImage.setDisableCircularTransformation(true);
 
-        // display default
-        displayFragment(new RecentBlogsFragment());
-        navigationView.setCheckedItem(R.id.nav_blogs);
+        loadLastFragment();
     }
 
 
@@ -132,10 +131,40 @@ public class MainActivity extends AppCompatActivity
     }
 
     /*
+     * Loads last active fragment
+     */
+    private void loadLastFragment(){
+        if (lastState == null || lastState.equals("rb")){
+            displayFragment(new RecentBlogsFragment());
+            navigationView.setCheckedItem(R.id.nav_blogs);
+        } else if (lastState.equals("ab")){
+            displayFragment(new AboutFragment());
+            navigationView.setCheckedItem(R.id.nav_about);
+        } else if (lastState.equals("cs")){
+            displayFragment(new ContestsFragment());
+            navigationView.setCheckedItem(R.id.nav_contests);
+        } else if (lastState.equals("pb")){
+            displayFragment(new ProblemsFragment());
+            navigationView.setCheckedItem(R.id.nav_problems);
+        }
+    }
+
+    /*
      * Displays a fragment
      */
     private void displayFragment(Fragment fragment){
         if (fragment != null) {
+            // save last state
+            if (fragment instanceof RecentBlogsFragment){
+                lastState = "rb";
+            } else if (fragment instanceof AboutFragment){
+                lastState = "ab";
+            } else if (fragment instanceof ContestsFragment){
+                lastState = "cs";
+            } else if (fragment instanceof ProblemsFragment){
+                lastState = "pb";
+            }
+            // go
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.content_frame, fragment);
             ft.commit();
