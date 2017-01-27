@@ -64,7 +64,7 @@ public class BlogDetailActivity extends AppCompatActivity {
         // load others
         title.setText(blog.title);
         author.setText(blog.handle);
-        time.setText(blog.time + "");
+        time.setText(Helper.humanizeTimeAgo(blog.time));
 
         // fetch
         fetchBlog();

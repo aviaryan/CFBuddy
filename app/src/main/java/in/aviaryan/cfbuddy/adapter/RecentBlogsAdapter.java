@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import in.aviaryan.cfbuddy.R;
 import in.aviaryan.cfbuddy.model.Blog;
 import in.aviaryan.cfbuddy.ui.BlogDetailActivity;
+import in.aviaryan.cfbuddy.utils.Helper;
 
 // Thanks
 // http://www.androidhive.info/2016/05/android-working-with-card-view-and-recycler-view/
@@ -64,7 +65,7 @@ public class RecentBlogsAdapter extends RecyclerView.Adapter<RecentBlogsAdapter.
         final Blog blog = blogs.get(position);
         holder.title.setText(blog.title);
         holder.author.setText(blog.handle);
-        holder.time.setText(blog.time + "");
+        holder.time.setText(Helper.humanizeTimeAgo(blog.time));
         holder.cardItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
