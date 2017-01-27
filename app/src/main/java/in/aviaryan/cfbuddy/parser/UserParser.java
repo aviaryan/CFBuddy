@@ -11,6 +11,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import in.aviaryan.cfbuddy.model.User;
+import in.aviaryan.cfbuddy.ui.MainActivity;
 import in.aviaryan.cfbuddy.ui.UserActivity;
 
 
@@ -27,8 +28,13 @@ public class UserParser extends BaseParser implements Response.Listener<JSONObje
         Log.d(TAG, response.toString());
         User user = parse(response);
         if (user != null){
-            ((UserActivity) activity).updateDisplay(user);
-            ((UserActivity) activity).updateCache(response.toString());
+            if (activity instanceof UserActivity){
+                ((UserActivity) activity).updateDisplay(user);
+                ((UserActivity) activity).updateCache(response.toString());
+            } else {
+                ((MainActivity) activity).updateDisplay(user);
+                ((MainActivity) activity).updateCache(response.toString());
+            }
         }
     }
 

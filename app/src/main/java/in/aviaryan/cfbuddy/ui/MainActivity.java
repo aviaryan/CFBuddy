@@ -16,11 +16,20 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import in.aviaryan.cfbuddy.R;
 import in.aviaryan.cfbuddy.data.PrefUtils;
+import in.aviaryan.cfbuddy.model.User;
+import in.aviaryan.cfbuddy.parser.UserParser;
+import in.aviaryan.cfbuddy.utils.Helper;
+import in.aviaryan.cfbuddy.utils.VolleyErrorListener;
 
 
 public class MainActivity extends AppCompatActivity
@@ -29,7 +38,10 @@ public class MainActivity extends AppCompatActivity
     NavigationView navigationView;
     PrefUtils prefUtils;
     CircleImageView userImage;
+    UserParser userParser;
+    private String userHandle;
     private static String lastState;
+    RequestQueue queue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +65,8 @@ public class MainActivity extends AppCompatActivity
 
         View headerView = navigationView.getHeaderView(0);
         // set handle in nav view
-        ((TextView) headerView.findViewById(R.id.nav_handle)).setText(prefUtils.getHandle());
+        userHandle = prefUtils.getHandle();
+        ((TextView) headerView.findViewById(R.id.nav_handle)).setText(userHandle);
         // http://stackoverflow.com/questions/36867298/using-android-vector-drawables-on-pre-lollipop-crash
         VectorDrawableCompat vc = VectorDrawableCompat.create(getResources(), R.drawable.ic_account_circle_accent_24px, getTheme());
         userImage = (CircleImageView) headerView.findViewById(R.id.nav_image_view);
@@ -61,6 +74,10 @@ public class MainActivity extends AppCompatActivity
         userImage.setDisableCircularTransformation(true);
 
         loadLastFragment();
+
+        // volley
+        queue = Volley.newRequestQueue(this);
+        fetchUser();
     }
 
 
@@ -178,5 +195,37 @@ public class MainActivity extends AppCompatActivity
     private void closeDrawer(){
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+    }
+
+    /*
+     * Profile Pic
+     * Loading
+     * TODO: on settings change, reflect in Nav
+     */
+    public void fetchUser(){
+        VolleyErrorListener vel = new VolleyErrorListener(this);
+        userParser = new UserParser(this);
+        // cache
+        String cacheUrl = "codeforces.com/api/user.info?handles=";
+        updateDisplayFromCache(Helper.getCache(getContentResolver(), cacheUrl + userHandle));
+        // request
+        String url = "http://codeforces.com/api/user.info?handles=" + userHandle;
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, userParser, vel);
+        queue.add(jsonObjectRequest);
+    }
+
+    public void updateDisplayFromCache(String cache){
+        if (cache != null){
+            updateDisplay(userParser.parse(userParser.stringToJson(cache)));
+        }
+    }
+
+    public void updateDisplay(User user){
+        userImage.setDisableCircularTransformation(false);
+        Glide.with(this).load(user.smallAvatar).into(userImage);
+    }
+
+    public void updateCache(String data){
+        Helper.updateCache(data, getContentResolver(), "codeforces.com/api/user.info?handles=" + userHandle);
     }
 }
