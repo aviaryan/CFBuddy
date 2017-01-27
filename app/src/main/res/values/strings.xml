@@ -30,4 +30,7 @@
     <string name="title_contests">Contests</string>
     <string name="contest_open_msg">Contest url copied</string>
     <string name="contest_label_open">OPEN</string>
+    <string name="about_app_name">CF Buddy v1.0.0</string>
+    <string name="about_author">Made by Avi Aryan</string>
+    <string name="title_about">About</string>
 </resources>
