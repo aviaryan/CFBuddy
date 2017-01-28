@@ -49,6 +49,7 @@ public class UserActivity extends AppCompatActivity {
     TextView city;
     ImageView avatar;
     SearchView searchView;
+    private static Boolean isDestroyed = true;
 
     User user;
     UserParser userParser;
@@ -57,6 +58,7 @@ public class UserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
+        isDestroyed = false;
 
         Log.d(TAG, "on create");
         user = new User();
@@ -113,6 +115,8 @@ public class UserActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         queue.stop();
+        // http://stackoverflow.com/questions/25823320/incorrect-image-rendered-with-glide-library
+        isDestroyed = true;
         super.onDestroy();
     }
 
@@ -138,9 +142,11 @@ public class UserActivity extends AppCompatActivity {
         organization.setText(undForNull(user.organisation));
         country.setText(undForNull(user.country));
         city.setText(undForNull(user.city));
-        Glide.with(this).load(user.avatar)
-                .centerCrop().placeholder(R.drawable.ic_account_circle_accent_24px)
-                .crossFade().into(avatar);
+        if (!isDestroyed){
+            Glide.with(this).load(user.avatar)
+                    .centerCrop().placeholder(R.drawable.ic_account_circle_accent_24px)
+                    .crossFade().into(avatar);
+        }
     }
 
     private String undForNull(String s){
