@@ -57,7 +57,7 @@ public class BlogDetailActivity extends AppCompatActivity {
         time = (TextView) findViewById(R.id.bd_time);
         webView = (WebView) findViewById(R.id.bd_webView);
         // load text
-        webView.loadData("Loading ...", "text/html; charset=utf-8", "utf-8");
+        webView.loadData(getString(R.string.text_loading), "text/html; charset=utf-8", "utf-8");
         webView.setBackgroundColor(Color.parseColor("#00FFFFFF"));
         WebSettings ws = webView.getSettings();
         ws.setDefaultFontSize(11);

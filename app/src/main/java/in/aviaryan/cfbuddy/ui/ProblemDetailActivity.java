@@ -50,7 +50,7 @@ public class ProblemDetailActivity extends AppCompatActivity {
         id = (TextView) findViewById(R.id.pd_id);
         webView = (WebView) findViewById(R.id.pd_webView);
         // load text
-        webView.loadData("Loading ...", "text/html; charset=utf-8", "utf-8");
+        webView.loadData(getString(R.string.text_loading), "text/html; charset=utf-8", "utf-8");
         webView.setBackgroundColor(Color.parseColor("#00FFFFFF"));
         WebSettings ws = webView.getSettings();
         ws.setDefaultFontSize(11);

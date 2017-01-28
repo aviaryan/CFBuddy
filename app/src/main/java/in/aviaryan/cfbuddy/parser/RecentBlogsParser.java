@@ -31,7 +31,6 @@ public class RecentBlogsParser extends BaseParser implements Response.Listener<J
     public void onResponse(JSONObject response) {
         Log.d(TAG, response.toString());
         ArrayList<Blog> blogs = parse(response);
-        FirebaseCrash.log("tada");  // TODO: remove this
         if (blogs != null) {
             ((RecentBlogsFragment) fragment).updateDisplay(blogs);
             ((RecentBlogsFragment) fragment).updateCache(response.toString());

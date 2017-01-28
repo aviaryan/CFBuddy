@@ -66,7 +66,7 @@ public class ContestsAdapter extends RecyclerView.Adapter<ContestsAdapter.MyView
             public void onClick(View view) {
                 String url = "http://codeforces.com/contest/" + contest.id;
                 ClipboardManager clipboard = (ClipboardManager) mContext.getSystemService(Context.CLIPBOARD_SERVICE);
-                ClipData clip = ClipData.newPlainText("Contest url", url);
+                ClipData clip = ClipData.newPlainText(mContext.getString(R.string.label_contest_url), url);
                 clipboard.setPrimaryClip(clip);
 
                 Snackbar
