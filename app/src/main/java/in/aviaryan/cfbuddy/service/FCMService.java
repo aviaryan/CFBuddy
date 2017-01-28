@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import in.aviaryan.cfbuddy.R;
+import in.aviaryan.cfbuddy.data.PrefUtils;
 import in.aviaryan.cfbuddy.ui.MainActivity;
 
 public class FCMService extends FirebaseMessagingService {
@@ -35,6 +36,10 @@ public class FCMService extends FirebaseMessagingService {
 
     // https://www.simplifiedcoding.net/firebase-cloud-messaging-tutorial-android/
     private void sendNotification(String messageBody) {
+        PrefUtils pf = new PrefUtils(getApplicationContext());
+        if (!pf.getNotificationSetting())
+            return;
+
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
