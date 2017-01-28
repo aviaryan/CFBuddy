@@ -138,7 +138,7 @@ public class RecentBlogsFragment extends Fragment
     private void restoreScroll(){
         if (rvParcel != null){
             mLinearLayoutManager.onRestoreInstanceState(rvParcel);
-            rvParcel = null;
+            // rvParcel = null;
         }
     }
 }

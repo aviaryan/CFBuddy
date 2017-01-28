@@ -138,7 +138,7 @@ public class ContestsFragment extends Fragment
     private void restoreScroll(){
         if (rvParcel != null){
             mLinearLayoutManager.onRestoreInstanceState(rvParcel);
-            rvParcel = null;
+            // rvParcel = null;  // view doesnt change so not needed
         }
     }
 }
