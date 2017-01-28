@@ -79,6 +79,12 @@ public class RecentBlogsFragment extends Fragment
         fetchRecentBlogs();
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        getActivity().overridePendingTransition(R.anim.right_slide_in, R.anim.left_slide_out);
+    }
+
     public void fetchRecentBlogs(){
         VolleyErrorListener vel = new VolleyErrorListener(getContext());
         rbp = new RecentBlogsParser(this);

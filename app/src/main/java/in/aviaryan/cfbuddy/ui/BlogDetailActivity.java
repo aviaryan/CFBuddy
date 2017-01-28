@@ -70,6 +70,12 @@ public class BlogDetailActivity extends AppCompatActivity {
         fetchBlog();
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(R.anim.right_slide_out, R.anim.left_slide_in);
+    }
+
     public void fetchBlog(){
         VolleyErrorListener vel = new VolleyErrorListener(this);
         bp = new BlogParser(this);
