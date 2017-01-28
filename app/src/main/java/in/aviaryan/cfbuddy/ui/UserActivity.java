@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
@@ -83,6 +84,19 @@ public class UserActivity extends AppCompatActivity {
         country = (TextView) findViewById(R.id.ua_country);
         avatar = (ImageView) findViewById(R.id.ua_photo);
         city = (TextView) findViewById(R.id.ua_city);
+
+        // fab share
+        (findViewById(R.id.ua_share_fab)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_SEND);
+                intent.putExtra(Intent.EXTRA_TEXT,
+                        "http://codeforces.com/profile/" + user.handle);
+                intent.setType("text/plain");
+                startActivity(intent);
+            }
+        });
 
         // set text
         handle.setText(user.handle);
