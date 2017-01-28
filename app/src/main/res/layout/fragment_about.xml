@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     tools:context="in.aviaryan.cfbuddy.ui.AboutFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <LinearLayout
         android:gravity="center"
         android:layout_width="match_parent"

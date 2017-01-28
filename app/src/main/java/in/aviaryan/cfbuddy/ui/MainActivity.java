@@ -221,7 +221,6 @@ public class MainActivity extends AppCompatActivity
     /*
      * Profile Pic
      * Loading
-     * TODO: on settings change, reflect in Nav
      */
     public void fetchUser(){
         VolleyErrorListener vel = new VolleyErrorListener(this);
