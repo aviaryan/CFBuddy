@@ -6,6 +6,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
@@ -42,6 +43,7 @@ public class RecentBlogsFragment extends Fragment
     RecyclerView mRecyclerView;
     RecentBlogsAdapter mAdapter;
     RecentBlogsParser rbp;
+    private static Parcelable rvParcel;
     private LinearLayoutManager mLinearLayoutManager;
 
     public RecentBlogsFragment() {
@@ -82,6 +84,7 @@ public class RecentBlogsFragment extends Fragment
     @Override
     public void onPause() {
         super.onPause();
+        rvParcel = mLinearLayoutManager.onSaveInstanceState();
         // getActivity().overridePendingTransition(R.anim.right_slide_in, R.anim.left_slide_out);
     }
 
@@ -107,6 +110,8 @@ public class RecentBlogsFragment extends Fragment
         Log.d(TAG, blogs.toString());
         mAdapter.blogs = blogs;
         mAdapter.notifyDataSetChanged();
+        // restore scroll
+        restoreScroll();
     }
 
     public void updateCache(String data){
@@ -128,5 +133,12 @@ public class RecentBlogsFragment extends Fragment
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
 
+    }
+
+    private void restoreScroll(){
+        if (rvParcel != null){
+            mLinearLayoutManager.onRestoreInstanceState(rvParcel);
+            rvParcel = null;
+        }
     }
 }

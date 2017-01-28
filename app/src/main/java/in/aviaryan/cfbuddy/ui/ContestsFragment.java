@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
@@ -43,6 +44,7 @@ public class ContestsFragment extends Fragment
     RecyclerView mRecyclerView;
     ContestsParser cp;
     ContestsAdapter mAdapter;
+    private static Parcelable rvParcel;
     private LinearLayoutManager mLinearLayoutManager;
 
     public ContestsFragment() {
@@ -80,6 +82,12 @@ public class ContestsFragment extends Fragment
         fetchContests();
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        rvParcel = mLinearLayoutManager.onSaveInstanceState();
+    }
+
     public void fetchContests(){
         VolleyErrorListener vel = new VolleyErrorListener(getContext());
         cp = new ContestsParser(this);
@@ -101,6 +109,9 @@ public class ContestsFragment extends Fragment
         Log.d(TAG, contests.toString());
         mAdapter.contests = contests;
         mAdapter.notifyDataSetChanged();
+
+        restoreScroll();  // useful when user navigates to other fragment
+        // and then comes back
     }
 
     public void updateCache(String data){
@@ -122,5 +133,12 @@ public class ContestsFragment extends Fragment
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
 
+    }
+
+    private void restoreScroll(){
+        if (rvParcel != null){
+            mLinearLayoutManager.onRestoreInstanceState(rvParcel);
+            rvParcel = null;
+        }
     }
 }
