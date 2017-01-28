@@ -58,7 +58,11 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         prefUtils = new PrefUtils(this);
 
-        FirebaseMessaging.getInstance().subscribeToTopic("POTD");  // Problem of the day
+        if (prefUtils.getNotificationSetting()){
+            FirebaseMessaging.getInstance().subscribeToTopic("POTD");  // Problem of the day
+        } else {
+            FirebaseMessaging.getInstance().unsubscribeFromTopic("POTD");
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
