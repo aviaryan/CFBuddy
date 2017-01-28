@@ -49,7 +49,8 @@
             android:id="@+id/bd_webView"
             android:layout_weight="100"
             android:layout_width="wrap_content"
-            android:layout_height="0dp" />
+            android:layout_height="0dp"
+            android:contentDescription="@string/cd_blog_text"/>
 
     </LinearLayout>
 

@@ -47,4 +47,11 @@
     <string name="label_contest_url">Contest url</string>
     <string name="text_loading">Loading …</string>
     <string name="user_profile_image">User Profile Image</string>
+    <string name="cd_blog_text">Blog text</string>
+    <string name="cd_problem_text">Problem text</string>
+    <string name="cd_contest_duration">Contest duration</string>
+    <string name="cd_problem_tags">Problem tags</string>
+    <string name="cd_problem_solved_count">Problem solved count</string>
+    <string name="cd_blog_author">Blog author</string>
+    <string name="cd_cf_handle">User\'s Codeforces handle</string>
 </resources>

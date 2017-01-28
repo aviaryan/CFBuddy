@@ -47,7 +47,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="\@handle"
-                style="@style/TextAppearance.AppCompat.Body1"/>
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:contentDescription="@string/cd_blog_author"/>
 
             <TextView
                 android:id="@+id/rb_blog_time"

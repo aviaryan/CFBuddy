@@ -43,7 +43,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="dp, maths"
-            style="@style/TextAppearance.AppCompat.Body1"/>
+            style="@style/TextAppearance.AppCompat.Body1"
+            android:contentDescription="@string/cd_problem_tags"/>
 
         <TextView
             android:id="@+id/pb_problem_count"
@@ -51,7 +52,8 @@
             android:layout_height="wrap_content"
             tools:text="x2223"
             style="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="@color/gray"/>
+            android:textColor="@color/gray"
+            android:contentDescription="@string/cd_problem_solved_count"/>
 
     </LinearLayout>
 
