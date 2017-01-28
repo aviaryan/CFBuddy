@@ -52,6 +52,8 @@ public class ContestsParser extends BaseParser implements Response.Listener<JSON
                     contest.startTime = date;
                 }
                 contests.add(contest);
+                if (i == 300)  // no need to show more contests, they are ancient
+                    break;
             }
             return contests;
         } catch (JSONException e){

@@ -72,8 +72,10 @@ public class ProblemsParser extends BaseParser implements Response.Listener<JSON
                     tags.add(tagsArray.getString(j));
                 }
                 problem.tags = tags;
-
                 problems.add(problem);
+
+                if (i == 1000)     // TODO: don't show old problems, need to optimize
+                    break;
             }
 
             return problems;
