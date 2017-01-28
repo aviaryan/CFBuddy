@@ -224,7 +224,6 @@ public class ProblemsFragment extends Fragment
             searchView.setQuery(query, true);
             MenuItemCompat.expandActionView(item);
             searchView.setQuery(query, false);
-//            searchView.setIconified(false);
         }
     }
 
@@ -239,7 +238,7 @@ public class ProblemsFragment extends Fragment
     private void filterProblems(String query){
         if (query.equals(""))
             return;
-        this.query = query;
+        ProblemsFragment.query = query;
         blockUpdate = true;
         inSearch = true;
         Intent msgIntent = new Intent(getContext(), MyIntentService.class);
