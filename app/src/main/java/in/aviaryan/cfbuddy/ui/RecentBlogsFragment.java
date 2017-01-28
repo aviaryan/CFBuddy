@@ -3,6 +3,7 @@ package in.aviaryan.cfbuddy.ui;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -32,6 +33,7 @@ import in.aviaryan.cfbuddy.model.Blog;
 import in.aviaryan.cfbuddy.parser.RecentBlogsParser;
 import in.aviaryan.cfbuddy.utils.Helper;
 import in.aviaryan.cfbuddy.utils.VolleyErrorListener;
+import in.aviaryan.cfbuddy.widget.WidgetProvider;
 
 
 public class RecentBlogsFragment extends Fragment
@@ -39,7 +41,7 @@ public class RecentBlogsFragment extends Fragment
 
     RequestQueue queue;
     private final String TAG = "CFLOG_RBF";
-    private final String URL = Contract.Cache.makeUIDFromRealUri("codeforces.com/api/recentActions");
+    public static final String URL = Contract.Cache.makeUIDFromRealUri("codeforces.com/api/recentActions");
     RecyclerView mRecyclerView;
     RecentBlogsAdapter mAdapter;
     RecentBlogsParser rbp;
@@ -49,7 +51,6 @@ public class RecentBlogsFragment extends Fragment
     public RecentBlogsFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -118,6 +119,9 @@ public class RecentBlogsFragment extends Fragment
         if (getContext() == null)
             return;
         Helper.updateCache(data, getContext().getContentResolver(), URL);
+
+        // update widget
+        updateWidget();
     }
 
     @Override
@@ -140,5 +144,12 @@ public class RecentBlogsFragment extends Fragment
             mLinearLayoutManager.onRestoreInstanceState(rvParcel);
             // rvParcel = null;
         }
+    }
+
+    private void updateWidget(){
+        // update widget
+        Intent cintent = new Intent(getContext(), WidgetProvider.class);
+        cintent.setAction(WidgetProvider.UPDATE_WIDGET);
+        getContext().sendBroadcast(cintent);
     }
 }

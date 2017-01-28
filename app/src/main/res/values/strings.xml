@@ -54,4 +54,5 @@
     <string name="cd_problem_solved_count">Problem solved count</string>
     <string name="cd_blog_author">Blog author</string>
     <string name="cd_cf_handle">User\'s Codeforces handle</string>
+    <string name="widget_wait_msg">Please wait. Loading data</string>
 </resources>

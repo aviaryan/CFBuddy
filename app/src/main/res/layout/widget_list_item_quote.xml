@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:orientation="vertical"
+    android:paddingLeft="8dp"
+    android:id="@+id/widget_listing"
+    android:background="@drawable/border"
+    android:paddingRight="8dp">
+
+    <TextView
+        android:id="@+id/widget_blog_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Some blog title"
+        android:textColor="#000000"
+        android:maxLines="1"
+        style="@style/TextAppearance.AppCompat.Subhead" />
+
+    <TextView
+        android:id="@+id/widget_blog_author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="\@handle"
+        style="@style/TextAppearance.AppCompat.Body1"
+        android:contentDescription="@string/cd_blog_author"
+        android:textColor="@color/colorPrimary"/>
+
+    <TextView
+        android:id="@+id/widget_blog_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Jan 21, 2016"
+        style="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@color/gray"/>
+
+</LinearLayout>
