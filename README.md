@@ -1,5 +1,7 @@
 # CFBuddy
 
+**[Will be added to PlayStore soon]**
+
 CFB is an android application for Codeforces (http://codeforces.com) online programming competition website.
 It comes with a vast set of features and follow material design practises. Some of its features are --
 
@@ -13,7 +15,7 @@ It comes with a vast set of features and follow material design practises. Some 
 8. Works offline. If you have loaded a problem or a blog post when you had Internet, it will
 work even after you lose internet connection.
 9. Codeforces Problem of the day. Get notified about one exciting problem, every day.
-
+10. Widget to view recent blogs
 
 
 ### Udacity Android Nanodegree Capstone project
