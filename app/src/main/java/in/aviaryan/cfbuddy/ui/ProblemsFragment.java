@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
@@ -56,6 +57,7 @@ public class ProblemsFragment extends Fragment
     Boolean inSearch = false;
     Boolean blockUpdate = false;
     private static String query;
+    private static Parcelable rvParcel;
     public ResponseReceiver receiver;
     private LinearLayoutManager mLinearLayoutManager;
     // used to store unfiltered list
@@ -113,6 +115,7 @@ public class ProblemsFragment extends Fragment
     @Override
     public void onPause() {
         super.onPause();
+        rvParcel = mLinearLayoutManager.onSaveInstanceState();
         // getActivity().overridePendingTransition(R.anim.right_slide_in, R.anim.left_slide_out);
     }
 
@@ -224,6 +227,8 @@ public class ProblemsFragment extends Fragment
             searchView.setQuery(query, true);
             MenuItemCompat.expandActionView(item);
             searchView.setQuery(query, false);
+        } else {
+            restoreScroll();  // normal restores
         }
     }
 
@@ -233,6 +238,13 @@ public class ProblemsFragment extends Fragment
 //        if (id == R.id.action_filter_problem){
 //        }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void restoreScroll(){
+        if (rvParcel != null){
+            mLinearLayoutManager.onRestoreInstanceState(rvParcel);
+            rvParcel = null;
+        }
     }
 
     private void filterProblems(String query){
@@ -255,6 +267,7 @@ public class ProblemsFragment extends Fragment
         public void onReceive(Context context, Intent intent) {
             inSearch = false;
             updateDisplay(newProblems);
+            restoreScroll();  // in case search, then detail, then restore
             inSearch = true;
         }
     }
