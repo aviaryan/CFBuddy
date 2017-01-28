@@ -9,13 +9,14 @@ It comes with a vast set of features and follow material design practises. Some 
 4. View recent Codeforces blog entries and read individual blogs
 5. View any codeforces user profile
 6. Receive exciting daily problems from Codeforces handpicked by our team
-7. Tablet UI supported
+7. <strike>Tablet UI supported</strike>
 8. Works offline. If you have loaded a problem or a blog post when you had Internet, it will
 work even after you lose internet connection.
 9. Codeforces Problem of the day. Get notified about one exciting problem, every day.
 
 
-## Udacity Android Nanodegree Capstone project
+
+### Udacity Android Nanodegree Capstone project
 
 #### Sign keys
 
