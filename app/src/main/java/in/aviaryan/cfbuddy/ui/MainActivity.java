@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -35,6 +36,7 @@ import in.aviaryan.cfbuddy.utils.VolleyErrorListener;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private static final String TAG = "CFLOG_MA";
     NavigationView navigationView;
     PrefUtils prefUtils;
     CircleImageView userImage;
@@ -43,12 +45,14 @@ public class MainActivity extends AppCompatActivity
     private static String lastState;
     RequestQueue queue;
     View headerView;
+    Boolean isEnding;
     private static Boolean isDestroyed = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        isEnding = false;
         isDestroyed = false;
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -97,7 +101,8 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onPause() {
         super.onPause();
-        overridePendingTransition(R.anim.right_slide_in, R.anim.left_slide_out);
+        if (!isEnding)
+            overridePendingTransition(R.anim.right_slide_in, R.anim.left_slide_out);
     }
 
     @Override
@@ -112,6 +117,7 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
+            isEnding = true;
             super.onBackPressed();
         }
     }
