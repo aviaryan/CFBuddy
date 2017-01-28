@@ -32,6 +32,7 @@ public class WidgetProvider extends AppWidgetProvider {
             Intent detailIntent = new Intent(context, BlogDetailActivity.class);
             detailIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             detailIntent.putExtra("blog", item);
+            detailIntent.putExtra("widget", true);
             context.startActivity(detailIntent);
             // end launch detail
         } else if (intent.getAction().equals(APP_OPEN)) {

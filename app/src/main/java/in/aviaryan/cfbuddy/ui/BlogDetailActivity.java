@@ -32,6 +32,7 @@ public class BlogDetailActivity extends AppCompatActivity {
     TextView time;
     WebView webView;
     RequestQueue queue;
+    Boolean widgetCall;
     private final String TAG = "CFLOG_BDA";
     // param
     private final String URL = Contract.Cache.makeUIDFromRealUri("codeforces.com/api/blogEntry.view?blogEntryId=");
@@ -51,6 +52,7 @@ public class BlogDetailActivity extends AppCompatActivity {
         queue = Volley.newRequestQueue(this);
         // get parcel
         blog = (Blog) Parcels.unwrap(getIntent().getParcelableExtra("blog"));
+        widgetCall = (getIntent().hasExtra("widget"));
         // get views
         title = (TextView) findViewById(R.id.bd_title);
         author = (TextView) findViewById(R.id.bd_author);
@@ -73,7 +75,9 @@ public class BlogDetailActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+        if (!widgetCall){
+            overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+        }
     }
 
     public void fetchBlog(){
