@@ -43,11 +43,13 @@ public class MainActivity extends AppCompatActivity
     private static String lastState;
     RequestQueue queue;
     View headerView;
+    private static Boolean isDestroyed = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        isDestroyed = false;
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         prefUtils = new PrefUtils(this);
@@ -96,6 +98,12 @@ public class MainActivity extends AppCompatActivity
     protected void onPause() {
         super.onPause();
         overridePendingTransition(R.anim.right_slide_in, R.anim.left_slide_out);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        isDestroyed = true;
     }
 
     @Override
@@ -242,7 +250,9 @@ public class MainActivity extends AppCompatActivity
 
     public void updateDisplay(User user){
         userImage.setDisableCircularTransformation(false);
-        Glide.with(this).load(user.smallAvatar).into(userImage);
+        if (!isDestroyed){
+            Glide.with(this).load(user.smallAvatar).into(userImage);
+        }
     }
 
     public void updateCache(String data){
