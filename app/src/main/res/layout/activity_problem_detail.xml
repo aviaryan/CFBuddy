@@ -9,6 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:focusable="true"
     tools:context="in.aviaryan.cfbuddy.ui.ProblemDetailActivity">
 
     <LinearLayout
@@ -21,6 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="432C"
+            android:nextFocusRight="@id/pd_title"
             style="@style/Base.TextAppearance.AppCompat.Title"
             android:textColor="@color/colorPrimaryLight"/>
 
@@ -31,6 +33,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="Ram and Shyam"
+            android:nextFocusLeft="@id/pd_id"
+            android:nextFocusDown="@id/pd_webView"
             style="@style/Base.TextAppearance.AppCompat.Title"/>
     </LinearLayout>
 
@@ -40,5 +44,6 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
+        android:nextFocusUp="@id/pd_title"
         android:contentDescription="@string/cd_problem_text"/>
 </LinearLayout>

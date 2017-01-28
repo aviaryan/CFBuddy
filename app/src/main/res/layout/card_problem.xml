@@ -8,6 +8,7 @@
     android:layout_height="wrap_content"
     android:paddingTop="8dp"
     android:paddingBottom="8dp"
+    android:focusable="true"
     android:background="@drawable/border">
 
     <LinearLayout
