@@ -82,6 +82,12 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         bindPreferenceSummaryToValue(findPreference("handle"));
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+    }
+
     /**
      * Set up the {@link android.app.ActionBar}, if the API is available.
      */

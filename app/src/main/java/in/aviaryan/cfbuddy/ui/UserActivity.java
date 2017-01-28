@@ -127,6 +127,12 @@ public class UserActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+    }
+
+    @Override
     protected void onDestroy() {
         queue.stop();
         // http://stackoverflow.com/questions/25823320/incorrect-image-rendered-with-glide-library

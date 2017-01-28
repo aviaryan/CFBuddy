@@ -82,7 +82,7 @@ public class RecentBlogsFragment extends Fragment
     @Override
     public void onPause() {
         super.onPause();
-        getActivity().overridePendingTransition(R.anim.right_slide_in, R.anim.left_slide_out);
+        // getActivity().overridePendingTransition(R.anim.right_slide_in, R.anim.left_slide_out);
     }
 
     public void fetchRecentBlogs(){

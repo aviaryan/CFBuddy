@@ -73,7 +73,7 @@ public class BlogDetailActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        overridePendingTransition(R.anim.right_slide_out, R.anim.left_slide_in);
+        overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
     }
 
     public void fetchBlog(){

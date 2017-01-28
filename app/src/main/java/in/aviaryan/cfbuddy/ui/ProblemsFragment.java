@@ -109,6 +109,12 @@ public class ProblemsFragment extends Fragment
         fetchProblems();
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        // getActivity().overridePendingTransition(R.anim.right_slide_in, R.anim.left_slide_out);
+    }
+
     public void fetchProblems(){
         VolleyErrorListener vel = new VolleyErrorListener(getContext());
         pp = new ProblemsParser(this);
