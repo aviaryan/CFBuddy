@@ -45,4 +45,6 @@
     <string name="action_filter_problem">Filter Problems</string>
     <string name="search_problem_label">Filter Problems</string>
     <string name="problem_search_hint">dp;762</string>
+    <string name="msg_no_user">User does not exist</string>
+    <string name="msg_server_400_error">Object does not exist on the server</string>
 </resources>
