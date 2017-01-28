@@ -5,6 +5,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Parcelable;
+import android.os.PersistableBundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -23,6 +25,9 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+
+import org.parceler.Parcel;
+import org.parceler.Parcels;
 
 import in.aviaryan.cfbuddy.R;
 import in.aviaryan.cfbuddy.data.Contract;
@@ -65,6 +70,17 @@ public class UserActivity extends AppCompatActivity {
         user = new User();
         Log.d(TAG, getIntent().getStringExtra("handle"));
         user.handle = getIntent().getStringExtra("handle");
+
+        // restore user
+        if (savedInstanceState != null && savedInstanceState.containsKey("user")){
+            Parcelable parcelUser = savedInstanceState.getParcelable("user");
+            if (parcelUser != null){
+                user = Parcels.unwrap(parcelUser);
+                Log.d(TAG, "restore state" + user.handle);
+            }
+        }
+
+        // update UI
         mToolbar = (Toolbar) findViewById(R.id.ua_toolbar);
         mToolbar.setTitle(user.handle);
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.ua_col_toolbar);
@@ -244,5 +260,12 @@ public class UserActivity extends AppCompatActivity {
             }
             fetchUser();
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Log.d(TAG, "parcelling");
+        outState.putParcelable("user", Parcels.wrap(user));
     }
 }

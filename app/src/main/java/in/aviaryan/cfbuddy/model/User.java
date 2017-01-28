@@ -1,6 +1,9 @@
 package in.aviaryan.cfbuddy.model;
 
 
+import org.parceler.Parcel;
+
+@Parcel
 public class User {
     public String handle;
     public String name;
@@ -13,4 +16,7 @@ public class User {
     public int maxRating;
     public String avatar;
     public String smallAvatar;  // avatar in API
+
+    public User(){
+    }
 }
