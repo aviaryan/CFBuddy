@@ -33,6 +33,7 @@
         android:layout_height="wrap_content"
         tools:text="Jan 21, 2016"
         style="@style/TextAppearance.AppCompat.Body1"
+        android:contentDescription="@string/text_blog_time"
         android:textColor="@color/gray"/>
 
 </LinearLayout>
