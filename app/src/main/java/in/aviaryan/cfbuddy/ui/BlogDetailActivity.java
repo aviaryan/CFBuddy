@@ -60,7 +60,7 @@ public class BlogDetailActivity extends AppCompatActivity {
         webView.loadData("Loading ...", "text/html; charset=utf-8", "utf-8");
         webView.setBackgroundColor(Color.parseColor("#00FFFFFF"));
         WebSettings ws = webView.getSettings();
-        ws.setDefaultFontSize(10);
+        ws.setDefaultFontSize(11);
         // load others
         title.setText(blog.title);
         author.setText(blog.handle);

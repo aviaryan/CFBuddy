@@ -53,7 +53,7 @@ public class ProblemDetailActivity extends AppCompatActivity {
         webView.loadData("Loading ...", "text/html; charset=utf-8", "utf-8");
         webView.setBackgroundColor(Color.parseColor("#00FFFFFF"));
         WebSettings ws = webView.getSettings();
-        ws.setDefaultFontSize(10);
+        ws.setDefaultFontSize(11);
         // set texts
         title.setText(problem.name);
         id.setText(problem.contestId + problem.index);
