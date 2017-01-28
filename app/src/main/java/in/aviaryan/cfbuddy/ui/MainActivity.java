@@ -69,6 +69,12 @@ public class MainActivity extends AppCompatActivity
         userImage = (CircleImageView) headerView.findViewById(R.id.nav_image_view);
         userImage.setImageDrawable(vc);
         userImage.setDisableCircularTransformation(true);
+        userImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openProfile();
+            }
+        });
 
         loadLastFragment();
     }
@@ -127,9 +133,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_profile) {
-            Intent intent = new Intent(this, UserActivity.class);
-            intent.putExtra("handle", prefUtils.getHandle());
-            startActivity(intent);
+            openProfile();
             return true;
         } else if (id == R.id.nav_problems) {
             displayFragment(new ProblemsFragment());
@@ -151,6 +155,12 @@ public class MainActivity extends AppCompatActivity
         navigationView.setCheckedItem(id);
         closeDrawer();
         return true;
+    }
+
+    private void openProfile(){
+        Intent intent = new Intent(this, UserActivity.class);
+        intent.putExtra("handle", userHandle);
+        startActivity(intent);
     }
 
     /*
