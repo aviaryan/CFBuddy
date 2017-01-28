@@ -1,9 +1,11 @@
 package in.aviaryan.cfbuddy.ui;
 
 
-import android.content.ContentValues;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -34,6 +36,7 @@ import in.aviaryan.cfbuddy.adapter.ProblemsAdapter;
 import in.aviaryan.cfbuddy.data.Contract;
 import in.aviaryan.cfbuddy.model.Problem;
 import in.aviaryan.cfbuddy.parser.ProblemsParser;
+import in.aviaryan.cfbuddy.service.MyIntentService;
 import in.aviaryan.cfbuddy.utils.Helper;
 import in.aviaryan.cfbuddy.utils.VolleyErrorListener;
 
@@ -52,8 +55,12 @@ public class ProblemsFragment extends Fragment
     SearchView searchView;
     Boolean inSearch = false;
     Boolean blockUpdate = false;
+    public ResponseReceiver receiver;
     private LinearLayoutManager mLinearLayoutManager;
-    ArrayList<Problem> fullProblems;
+    // used to store unfiltered list
+    public static ArrayList<Problem> fullProblems;
+    // used to store filtered list
+    public static ArrayList<Problem> newProblems;
 
     public ProblemsFragment() {
         // Required empty public constructor
@@ -87,6 +94,11 @@ public class ProblemsFragment extends Fragment
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
+        IntentFilter filter = new IntentFilter(ResponseReceiver.ACTION_RESP);
+        filter.addCategory(Intent.CATEGORY_DEFAULT);
+        receiver = new ResponseReceiver();
+        getContext().registerReceiver(receiver, filter);
     }
 
     @Override
@@ -214,23 +226,21 @@ public class ProblemsFragment extends Fragment
             return;
         blockUpdate = true;
         inSearch = true;
-        String [] queries = query.split(";");
-        ArrayList<Problem> newProblems = new ArrayList<>();
-        Boolean fail;
-        for (Problem problem: fullProblems){
-            fail = false;
-            for (String q: queries){
-                if (!(problem.tags.contains(q) || (problem.contestId + problem.index).contains(q))) {
-                    fail = true;
-                    break;
-                }
-            }
-            if (!fail)
-                newProblems.add(problem);
+        Intent msgIntent = new Intent(getContext(), MyIntentService.class);
+        msgIntent.putExtra("query", query);
+        msgIntent.setAction(MyIntentService.ACTION_PROBLEM_FILTER);
+        getContext().startService(msgIntent);
+    }
+
+    // intent service
+    public class ResponseReceiver extends BroadcastReceiver {
+        public static final String ACTION_RESP = "in.aviaryan.cfbuddy.intent.action.PROBLEM_FILTER";
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            inSearch = false;
+            updateDisplay(newProblems);
+            inSearch = true;
         }
-        // update
-        inSearch = false;
-        updateDisplay(newProblems);
-        inSearch = true;
     }
 }

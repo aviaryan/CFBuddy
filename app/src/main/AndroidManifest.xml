@@ -63,12 +63,16 @@
         </activity>
         <activity
             android:name=".ui.ProblemDetailActivity"
-            android:launchMode="singleTop"
-            android:label="@string/label_problem_details">
+            android:label="@string/label_problem_details"
+            android:launchMode="singleTop">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.MainActivity" />
         </activity>
+
+        <service
+            android:name=".service.MyIntentService"
+            android:exported="false"></service>
     </application>
 
 </manifest>
