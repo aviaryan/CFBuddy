@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity
     private String userHandle;
     private static String lastState;
     RequestQueue queue;
+    View headerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +53,6 @@ public class MainActivity extends AppCompatActivity
         prefUtils = new PrefUtils(this);
 
         FirebaseMessaging.getInstance().subscribeToTopic("POTD");  // Problem of the day
-        // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -63,10 +63,7 @@ public class MainActivity extends AppCompatActivity
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        View headerView = navigationView.getHeaderView(0);
-        // set handle in nav view
-        userHandle = prefUtils.getHandle();
-        ((TextView) headerView.findViewById(R.id.nav_handle)).setText(userHandle);
+        headerView = navigationView.getHeaderView(0);
         // http://stackoverflow.com/questions/36867298/using-android-vector-drawables-on-pre-lollipop-crash
         VectorDrawableCompat vc = VectorDrawableCompat.create(getResources(), R.drawable.ic_account_circle_accent_24px, getTheme());
         userImage = (CircleImageView) headerView.findViewById(R.id.nav_image_view);
@@ -74,12 +71,20 @@ public class MainActivity extends AppCompatActivity
         userImage.setDisableCircularTransformation(true);
 
         loadLastFragment();
+    }
 
+    @Override
+    protected void onResume() {
+        // Lifecycle: http://www.javatpoint.com/android-life-cycle-of-activity
+        super.onResume();
+        // Load if settings changed
+        // runs after onCreate
+        userHandle = prefUtils.getHandle();
+        ((TextView) headerView.findViewById(R.id.nav_handle)).setText(userHandle);
         // volley
         queue = Volley.newRequestQueue(this);
         fetchUser();
     }
-
 
     @Override
     public void onBackPressed() {
