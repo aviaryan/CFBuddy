@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity
     RequestQueue queue;
     View headerView;
     Boolean isEnding;
-    private static Boolean isDestroyed = true;
+    private Boolean isDestroyed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -260,7 +260,7 @@ public class MainActivity extends AppCompatActivity
 
     public void updateDisplay(User user){
         userImage.setDisableCircularTransformation(false);
-        if (!isDestroyed){
+        if (!isDestroyed){  // is destroyed of that instance
             Glide.with(this).load(user.smallAvatar).into(userImage);
         }
     }
