@@ -34,7 +34,7 @@ public class ProblemParser extends BaseParser implements Response.Listener<Strin
         // http://howtodoinjava.com/jsoup/complete-jsoup-tutorial/
         Document document = Jsoup.parse(response);
         Element element = document.select("div[class=problem-statement]").first();
-        Log.d(TAG, element.toString());
+        // Log.d(TAG, element.toString());
         return (element == null) ? response : element.html();
     }
 }

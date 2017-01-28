@@ -39,7 +39,7 @@ public class Helper {
             return null;
         if (cursor.moveToNext()){
             String data = cursor.getString(Contract.Cache.POSITION_DATA);
-            Log.d(TAG, data);
+//            Log.d(TAG, data);
             cursor.close();
             return data;
         } else {

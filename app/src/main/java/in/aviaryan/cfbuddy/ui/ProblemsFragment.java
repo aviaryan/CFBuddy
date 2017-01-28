@@ -55,6 +55,7 @@ public class ProblemsFragment extends Fragment
     SearchView searchView;
     Boolean inSearch = false;
     Boolean blockUpdate = false;
+    private static String query;
     public ResponseReceiver receiver;
     private LinearLayoutManager mLinearLayoutManager;
     // used to store unfiltered list
@@ -213,10 +214,18 @@ public class ProblemsFragment extends Fragment
                 Log.d(TAG, "closed");
                 inSearch = false;
                 blockUpdate = false;
+                query = null;
                 updateDisplay(fullProblems);
                 return true;
             }
         });
+
+        if (query != null){ // restore state
+            searchView.setQuery(query, true);
+            MenuItemCompat.expandActionView(item);
+            searchView.setQuery(query, false);
+//            searchView.setIconified(false);
+        }
     }
 
     @Override
@@ -230,6 +239,7 @@ public class ProblemsFragment extends Fragment
     private void filterProblems(String query){
         if (query.equals(""))
             return;
+        this.query = query;
         blockUpdate = true;
         inSearch = true;
         Intent msgIntent = new Intent(getContext(), MyIntentService.class);
