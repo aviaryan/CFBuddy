@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/TextAppearance.AppCompat.Title"
-            android:nextFocusDown="@id/bd_author"
+            android:nextFocusDown="@+id/bd_author"
             tools:text="A blog post"/>
 
         <LinearLayout
@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 style="@style/TextAppearance.AppCompat.Subhead"
                 android:nextFocusUp="@id/bd_title"
-                android:nextFocusRight="@id/bd_time"
+                android:nextFocusRight="@+id/bd_time"
                 tools:text="by aviaryan"/>
 
             <TextView
@@ -46,7 +46,7 @@
                 android:layout_marginLeft="10dp"
                 style="@style/TextAppearance.AppCompat.Small"
                 android:nextFocusLeft="@id/bd_author"
-                android:nextFocusDown="@id/bd_webView"
+                android:nextFocusDown="@+id/bd_webView"
                 tools:text="3 days ago" />
 
         </LinearLayout>

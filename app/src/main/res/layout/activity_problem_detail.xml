@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="432C"
-            android:nextFocusRight="@id/pd_title"
+            android:nextFocusRight="@+id/pd_title"
             style="@style/Base.TextAppearance.AppCompat.Title"
             android:textColor="@color/colorPrimaryLight"/>
 
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             tools:text="Ram and Shyam"
             android:nextFocusLeft="@id/pd_id"
-            android:nextFocusDown="@id/pd_webView"
+            android:nextFocusDown="@+id/pd_webView"
             style="@style/Base.TextAppearance.AppCompat.Title"/>
     </LinearLayout>
 

@@ -216,13 +216,13 @@ public class UserActivity extends AppCompatActivity {
         int id = item.getItemId();
         Log.d(TAG, "what");
 
-        if (id == R.id.ua_action_settings){
-            Intent intent = new Intent(this, SettingsActivity.class);
-            startActivity(intent);
-            return true;
-        } else if (id == R.id.action_search_profile){
-
-        }
+//        if (id == R.id.ua_action_settings){
+//            Intent intent = new Intent(this, SettingsActivity.class);
+//            startActivity(intent);
+//            return true;
+//        } else if (id == R.id.action_search_profile){
+//
+//        }
         return super.onOptionsItemSelected(item);
     }
 

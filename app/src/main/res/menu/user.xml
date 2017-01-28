@@ -10,9 +10,11 @@
         android:voiceSearchMode="showVoiceSearchButton|launchRecognizer"
         app:showAsAction="ifRoom"/>
 
-    <item
-        android:id="@+id/ua_action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+    <!-- not needed actually
+        + troubles with transitions -->
+    <!--<item-->
+        <!--android:id="@+id/ua_action_settings"-->
+        <!--android:orderInCategory="100"-->
+        <!--android:title="@string/action_settings"-->
+        <!--app:showAsAction="never" />-->
 </menu>
