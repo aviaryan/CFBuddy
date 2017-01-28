@@ -46,4 +46,5 @@
     <string name="msg_server_400_error">Object does not exist on the server</string>
     <string name="label_contest_url">Contest url</string>
     <string name="text_loading">Loading …</string>
+    <string name="user_profile_image">User Profile Image</string>
 </resources>
