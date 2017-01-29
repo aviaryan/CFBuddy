@@ -85,8 +85,6 @@ public class MainActivity extends AppCompatActivity
                 openProfile();
             }
         });
-
-        loadLastFragment();
     }
 
     @Override
@@ -100,6 +98,8 @@ public class MainActivity extends AppCompatActivity
         // volley
         queue = Volley.newRequestQueue(this);
         fetchUser();
+        // last fragment
+        loadLastFragment();
     }
 
     @Override
