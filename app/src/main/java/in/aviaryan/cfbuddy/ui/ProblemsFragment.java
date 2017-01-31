@@ -49,7 +49,8 @@ public class ProblemsFragment extends Fragment
 
     RequestQueue queue;
     private final String TAG = "CFLOG_PBF";
-    private final String URL = Contract.Cache.makeUIDFromRealUri("codeforces.com/api/problemset.problems");
+    private static final String REAL_URL = "http://codeforces.com/api/problemset.problems";
+    private final String URL = Contract.Cache.makeUIDFromRealUri(REAL_URL);
     RecyclerView mRecyclerView;
     ProblemsParser pp;
     ProblemsAdapter mAdapter;
@@ -131,8 +132,7 @@ public class ProblemsFragment extends Fragment
         // cache
         updateDisplayFromCache(Helper.getCache(getContext().getContentResolver(), URL));
         // request
-        String url = "http://codeforces.com/api/problemset.problems";
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, pp, vel);
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, REAL_URL, null, pp, vel);
 
         //Set a retry policy in case of SocketTimeout & ConnectionTimeout Exceptions.
         //Volley does retry for you if you have specified the policy.

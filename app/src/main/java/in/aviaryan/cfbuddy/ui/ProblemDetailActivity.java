@@ -36,7 +36,8 @@ public class ProblemDetailActivity extends AppCompatActivity {
     RequestQueue queue;
     ProblemParser pdp;
     private final String TAG = "CFLOG_PDA";
-    private final String URL = Contract.Cache.makeUIDFromRealUri("http://codeforces.com/problemset/problem/");  // 743/F
+    private static final String REAL_URL = "http://codeforces.com/problemset/problem/";
+    private static final String URL = Contract.Cache.makeUIDFromRealUri(REAL_URL);  // 743/F
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,8 +76,7 @@ public class ProblemDetailActivity extends AppCompatActivity {
         // cache
         updateDisplayFromCache(Helper.getCache(getContentResolver(), URL + problem.contestId + problem.index));
         // request
-        String url = "http://codeforces.com/problemset/problem/" + problem.contestId
-                + "/" + problem.index;
+        String url = REAL_URL + problem.contestId + "/" + problem.index;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, pdp, vel);
         queue.add(stringRequest);
     }
@@ -111,8 +111,7 @@ public class ProblemDetailActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_share){
-            Helper.sharePlainText(this,
-                    "http://codeforces.com/problemset/problem/" + problem.contestId + "/" + problem.index);
+            Helper.sharePlainText(this, REAL_URL + problem.contestId + "/" + problem.index);
         }
         return super.onOptionsItemSelected(item);
     }

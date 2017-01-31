@@ -40,7 +40,8 @@ public class ContestsFragment extends Fragment
 
     RequestQueue queue;
     private final String TAG = "CFLOG_CSF";
-    private final String URL = Contract.Cache.makeUIDFromRealUri("codeforces.com/api/contest.list");
+    private final String REAL_URL = "http://codeforces.com/api/contest.list";
+    private final String URL = Contract.Cache.makeUIDFromRealUri(REAL_URL);
     RecyclerView mRecyclerView;
     ContestsParser cp;
     ContestsAdapter mAdapter;
@@ -94,8 +95,7 @@ public class ContestsFragment extends Fragment
         // cache
         updateDisplayFromCache(Helper.getCache(getContext().getContentResolver(), URL));
         // request
-        String url = "http://codeforces.com/api/contest.list";
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, cp, vel);
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, REAL_URL, null, cp, vel);
         queue.add(jsonObjectRequest);
     }
 

@@ -37,7 +37,9 @@ public final class Contract {
         }
 
         public static String makeUIDFromRealUri(String uri){
-            return uri.replace("/", "$");
+            return uri
+                    .replace("http://", "")  // not needed
+                    .replace("/", "$");  // path safe
         }
     }
 

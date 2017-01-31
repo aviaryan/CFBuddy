@@ -35,7 +35,8 @@ public class BlogDetailActivity extends AppCompatActivity {
     Boolean widgetCall;
     private final String TAG = "CFLOG_BDA";
     // param
-    private final String URL = Contract.Cache.makeUIDFromRealUri("codeforces.com/api/blogEntry.view?blogEntryId=");
+    private final String REAL_URL = "http://codeforces.com/api/blogEntry.view?blogEntryId=";
+    private final String URL = Contract.Cache.makeUIDFromRealUri(REAL_URL);
 
     Blog blog;
     BlogParser bp;
@@ -86,7 +87,7 @@ public class BlogDetailActivity extends AppCompatActivity {
         // cache
         updateDisplayFromCache(Helper.getCache(getContentResolver(), URL + blog.id));
         // request
-        String url = "http://codeforces.com/api/blogEntry.view?blogEntryId=" + blog.id;
+        String url = REAL_URL + blog.id;
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, bp, vel);
         queue.add(jsonObjectRequest);
     }

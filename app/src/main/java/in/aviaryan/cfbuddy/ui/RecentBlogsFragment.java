@@ -41,7 +41,8 @@ public class RecentBlogsFragment extends Fragment
 
     RequestQueue queue;
     private final String TAG = "CFLOG_RBF";
-    public static final String URL = Contract.Cache.makeUIDFromRealUri("codeforces.com/api/recentActions");
+    private static final String REAL_URL = "http://codeforces.com/api/recentActions";
+    public static final String URL = Contract.Cache.makeUIDFromRealUri(REAL_URL);
     RecyclerView mRecyclerView;
     RecentBlogsAdapter mAdapter;
     RecentBlogsParser rbp;
@@ -95,7 +96,7 @@ public class RecentBlogsFragment extends Fragment
         // cache
         updateDisplayFromCache(Helper.getCache(getContext().getContentResolver(), URL));
         // request
-        String url = "http://codeforces.com/api/recentActions?maxCount=100";
+        String url = REAL_URL + "?maxCount=100";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, rbp, vel);
         queue.add(jsonObjectRequest);
 //        queue.start();

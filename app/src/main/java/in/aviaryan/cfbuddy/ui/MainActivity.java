@@ -26,6 +26,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import in.aviaryan.cfbuddy.R;
+import in.aviaryan.cfbuddy.data.Contract;
 import in.aviaryan.cfbuddy.data.PrefUtils;
 import in.aviaryan.cfbuddy.model.User;
 import in.aviaryan.cfbuddy.parser.UserParser;
@@ -243,11 +244,12 @@ public class MainActivity extends AppCompatActivity
     public void fetchUser(){
         VolleyErrorListener vel = new VolleyErrorListener(this);
         userParser = new UserParser(this);
+        String url = "http://codeforces.com/api/user.info?handles=";
         // cache
-        String cacheUrl = "codeforces.com/api/user.info?handles=";
+        String cacheUrl = Contract.Cache.makeUIDFromRealUri(url);
         updateDisplayFromCache(Helper.getCache(getContentResolver(), cacheUrl + userHandle));
         // request
-        String url = "http://codeforces.com/api/user.info?handles=" + userHandle;
+        url += userHandle;
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, userParser, vel);
         queue.add(jsonObjectRequest);
     }

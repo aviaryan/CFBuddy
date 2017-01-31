@@ -38,7 +38,8 @@ public class UserActivity extends AppCompatActivity {
     CollapsingToolbarLayout collapsingToolbarLayout;
     RequestQueue queue;
     private final String TAG = "CFLOG_UA";
-    private final String URL = Contract.Cache.makeUIDFromRealUri("codeforces.com/api/user.info?handles=");
+    private final String REAL_URL = "http://codeforces.com/api/user.info?handles=";
+    private final String URL = Contract.Cache.makeUIDFromRealUri(REAL_URL);
     private Boolean searchEnabled = false;
     private Boolean searchIntentRecd = false;
     TextView handle;
@@ -121,7 +122,7 @@ public class UserActivity extends AppCompatActivity {
         // cache
         updateDisplayFromCache(Helper.getCache(getContentResolver(), URL + user.handle));
         // request
-        String url = "http://codeforces.com/api/user.info?handles=" + user.handle;
+        String url = REAL_URL + user.handle;
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, userParser, vel);
         queue.add(jsonObjectRequest);
     }
@@ -219,16 +220,6 @@ public class UserActivity extends AppCompatActivity {
 
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        int id = item.getItemId();
-        Log.d(TAG, "what");
-
-//        if (id == R.id.ua_action_settings){
-//            Intent intent = new Intent(this, SettingsActivity.class);
-//            startActivity(intent);
-//            return true;
-//        } else if (id == R.id.action_search_profile){
-//
-//        }
         return super.onOptionsItemSelected(item);
     }
 
