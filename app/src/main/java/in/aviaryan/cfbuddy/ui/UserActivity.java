@@ -100,12 +100,7 @@ public class UserActivity extends AppCompatActivity {
         (findViewById(R.id.ua_share_fab)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.setAction(Intent.ACTION_SEND);
-                intent.putExtra(Intent.EXTRA_TEXT,
-                        "http://codeforces.com/profile/" + user.handle);
-                intent.setType("text/plain");
-                startActivity(intent);
+                Helper.sharePlainText(UserActivity.this, "http://codeforces.com/profile/" + user.handle);
             }
         });
 

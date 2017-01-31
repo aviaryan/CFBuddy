@@ -3,6 +3,7 @@ package in.aviaryan.cfbuddy.utils;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.support.v4.content.CursorLoader;
@@ -104,5 +105,16 @@ public class Helper {
         contentValues.put(Contract.Cache.COLUMN_DATA, data);
         contentValues.put(Contract.Cache.COLUMN_TIME, "");
         contentResolver.insert(uri, contentValues);
+    }
+
+    /*
+     * Share Helper
+     */
+    public static void sharePlainText(Context context, String extraText){
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_TEXT, extraText);
+        intent.setType("text/plain");
+        context.startActivity(intent);
     }
 }

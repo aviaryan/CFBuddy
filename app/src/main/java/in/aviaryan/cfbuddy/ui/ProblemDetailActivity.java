@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.TextView;
@@ -93,5 +95,25 @@ public class ProblemDetailActivity extends AppCompatActivity {
 
     public void updateCache(String data){
         Helper.updateCache(data, getContentResolver(), URL + problem.contestId + problem.index);
+    }
+
+    /*
+     * Options Menu
+     */
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_share, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_share){
+            Helper.sharePlainText(this,
+                    "http://codeforces.com/problemset/problem/" + problem.contestId + "/" + problem.index);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
