@@ -9,7 +9,7 @@ import android.util.Log;
 
 public class SQLiteHelper extends SQLiteOpenHelper {
     static final String DB_NAME = "cfbuddy.db";
-    private static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 2;
     private static final String TAG = "CFLOG_SQLH";
 
     public SQLiteHelper(Context context){
@@ -22,7 +22,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 + Contract.Cache.COLUMN_ID + " INTEGER PRIMARY KEY, "
                 + Contract.Cache.COLUMN_UID + " TEXT NOT NULL UNIQUE, "
                 + Contract.Cache.COLUMN_DATA + " TEXT NOT NULL, "
-                + Contract.Cache.COLUMN_TIME + " TEXT NOT NULL"
+                + Contract.Cache.COLUMN_TIME + " INTEGER NOT NULL"
                 + ")";
         Log.d(TAG, "creating table");
         sqLiteDatabase.execSQL(builder);

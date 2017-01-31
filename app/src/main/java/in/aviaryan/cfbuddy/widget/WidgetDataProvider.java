@@ -75,7 +75,9 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
         Log.v(LOG_TAG, "cr done");
         String cache = Helper.getCache(mContext.getContentResolver(), RecentBlogsFragment.URL);
         RecentBlogsParser rb = new RecentBlogsParser(null);
-        mCollections = rb.parse(rb.stringToJson(cache));
+        if (cache != null){
+            mCollections = rb.parse(rb.stringToJson(cache));
+        }
     }
 
     @Override

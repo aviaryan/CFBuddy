@@ -103,7 +103,7 @@ public class Helper {
         ContentValues contentValues = new ContentValues();
         contentValues.put(Contract.Cache.COLUMN_UID, url);  // give full url
         contentValues.put(Contract.Cache.COLUMN_DATA, data);
-        contentValues.put(Contract.Cache.COLUMN_TIME, "");
+        contentValues.put(Contract.Cache.COLUMN_TIME, System.currentTimeMillis());
         contentResolver.insert(uri, contentValues);
     }
 
