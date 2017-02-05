@@ -48,7 +48,8 @@ public class MyIntentService extends IntentService {
             if (!fail)
                 newProblems.add(problem);
         }
-        ProblemsFragment.newProblems = newProblems;
+        ProblemsFragment.newProblems.clear();
+        ProblemsFragment.newProblems.addAll(newProblems);
     }
 
     private void respondFoo(){

@@ -64,7 +64,7 @@ public class ProblemsFragment extends Fragment
     // used to store unfiltered list
     public static ArrayList<Problem> fullProblems;
     // used to store filtered list
-    public static ArrayList<Problem> newProblems;
+    public static ArrayList<Problem> newProblems = new ArrayList<>();
 
     public ProblemsFragment() {
         // Required empty public constructor
@@ -156,9 +156,16 @@ public class ProblemsFragment extends Fragment
 //        Log.d(TAG, problems.toString());
         if (blockUpdate && inSearch)  // happens when async call of data request
             return;
-        if (!blockUpdate)  // happens only when async call
-            fullProblems = problems;
-        mAdapter.problems = problems;
+        if (!blockUpdate) {  // happens only when async call
+            if (!problems.equals(fullProblems)){  // fullProblems is passed when search closes
+                // we want to avoid that
+                // gc optimization: http://stackoverflow.com/questions/36497196/
+                fullProblems.clear();
+                fullProblems.addAll(problems);
+            }
+        }
+        mAdapter.problems.clear();
+        mAdapter.problems.addAll(problems);
         mAdapter.notifyDataSetChanged();
     }
 
