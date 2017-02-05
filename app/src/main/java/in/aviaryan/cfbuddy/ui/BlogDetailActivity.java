@@ -31,7 +31,7 @@ public class BlogDetailActivity extends AppCompatActivity {
     TextView author;
     TextView time;
     WebView webView;
-    RequestQueue queue;
+    private RequestQueue queue;
     Boolean widgetCall;
     private final String TAG = "CFLOG_BDA";
     // param

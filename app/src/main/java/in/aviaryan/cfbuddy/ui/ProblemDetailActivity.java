@@ -1,8 +1,6 @@
 package in.aviaryan.cfbuddy.ui;
 
-import android.content.ContentValues;
 import android.graphics.Color;
-import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,8 +31,8 @@ public class ProblemDetailActivity extends AppCompatActivity {
     TextView title;
     TextView id;
     WebView webView;
-    RequestQueue queue;
-    ProblemParser pdp;
+    private RequestQueue queue;
+    private ProblemParser pdp;
     private final String TAG = "CFLOG_PDA";
     private static final String REAL_URL = "http://codeforces.com/problemset/problem/";
     private static final String URL = Contract.Cache.makeUIDFromRealUri(REAL_URL);  // 743/F

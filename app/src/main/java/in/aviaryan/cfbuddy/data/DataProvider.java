@@ -19,7 +19,7 @@ public class DataProvider extends ContentProvider {
     static final int CACHE_ITEM = 1;
     static final int CACHE = 2;
 
-    static UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+    private static UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
     static {
         uriMatcher.addURI(Contract.AUTHORITY, Contract.PATH_CACHE_WITH_ITEM, CACHE_ITEM);
         uriMatcher.addURI(Contract.AUTHORITY, Contract.PATH_CACHE, CACHE);

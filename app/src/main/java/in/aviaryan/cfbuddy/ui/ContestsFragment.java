@@ -1,6 +1,7 @@
 package in.aviaryan.cfbuddy.ui;
 
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
@@ -132,7 +133,7 @@ public class ContestsFragment extends Fragment
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-
+        // no implementation needed
     }
 
     private void restoreScroll(){
