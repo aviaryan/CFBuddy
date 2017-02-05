@@ -1,5 +1,7 @@
 # CFBuddy
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ca4a7e397f6f43a986614f5403cd7ea9)](https://www.codacy.com/app/aviaryan/CFBuddy)
+
 **[Will be added to PlayStore soon]**
 
 CFB is an android application for Codeforces (http://codeforces.com) online programming competition website.
