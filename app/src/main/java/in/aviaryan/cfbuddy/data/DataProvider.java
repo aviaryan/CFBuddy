@@ -11,6 +11,8 @@ import android.support.annotation.Nullable;
 
 import com.google.firebase.crash.FirebaseCrash;
 
+import in.aviaryan.cfbuddy.utils.CacheCleaner;
+
 
 public class DataProvider extends ContentProvider {
 
@@ -103,6 +105,13 @@ public class DataProvider extends ContentProvider {
                         Contract.Cache.TABLE_NAME,
                         Contract.Cache.COLUMN_UID + " = ?",
                         new String[]{Contract.Cache.getUIDFromUri(uri)}
+                );
+                break;
+            case CACHE:
+                rowsDeleted = db.delete(
+                        Contract.Cache.TABLE_NAME,
+                        Contract.Cache.COLUMN_TIME + " < ?",
+                        new String[]{CacheCleaner.getThresholdTime()+""}
                 );
                 break;
             default:

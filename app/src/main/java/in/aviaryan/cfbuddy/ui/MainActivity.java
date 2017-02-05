@@ -30,6 +30,7 @@ import in.aviaryan.cfbuddy.data.Contract;
 import in.aviaryan.cfbuddy.data.PrefUtils;
 import in.aviaryan.cfbuddy.model.User;
 import in.aviaryan.cfbuddy.parser.UserParser;
+import in.aviaryan.cfbuddy.utils.CacheCleaner;
 import in.aviaryan.cfbuddy.utils.Helper;
 import in.aviaryan.cfbuddy.utils.VolleyErrorListener;
 
@@ -86,6 +87,9 @@ public class MainActivity extends AppCompatActivity
                 openProfile();
             }
         });
+
+        // clean cache
+        CacheCleaner.cleanCache(getContentResolver());
     }
 
     @Override
